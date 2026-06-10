@@ -3048,7 +3048,11 @@ function initSplash() {
     setTimeout(() => {
         const splash = document.getElementById('splash-screen');
         if (splash) splash.classList.add('fade-out');
-        setTimeout(() => { if (splash) splash.style.display = 'none'; }, 600);
+        setTimeout(() => {
+            if (splash) splash.style.display = 'none';
+            const mainContainer = document.getElementById('main-container');
+            if (mainContainer) mainContainer.style.display = 'flex';
+        }, 600);
     }, 1500);
 }
 
