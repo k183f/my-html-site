@@ -993,6 +993,22 @@ body {
     font-weight: 500;
     color: white;
 }
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -1007,7 +1023,7 @@ body {
                 <div class="loader-bar"></div>
             </div>
         </div>
-        <div id="main-container" class="main-container" style="display:none;">
+        <div id="main-container" class="main-container">
             <header id="app-header" class="app-header">
                 <div class="header-left">
                     <button class="header-btn" id="back-btn" style="display:none;" onclick="goBack()">
@@ -3951,6 +3967,24 @@ function renderBaziResult(container, result) {
             <p>${result.simpleAnalysis}</p>
         </div>
     `;
+}
+// ===================== 工具函数 =====================
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.style.display = 'block';
+    t.style.opacity = '1';
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => { t.style.display = 'none'; }, 300); }, 2000);
+}
+
+function goBack() {
+    navigateTo('home');
+    document.getElementById('back-btn').style.display = 'none';
+}
+
+function showSettings() {
+    navigateTo('settings');
 }
     </script>
 </body>
