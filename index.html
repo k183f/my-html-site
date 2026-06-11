@@ -463,7 +463,13 @@ function initSplash(){
     s.style.cssText=`left:${rand(0,100)}%;top:${rand(0,100)}%;width:${rand(1,3)}px;height:${rand(1,3)}px;animation-delay:${rand(0,2)}s`;
     c.appendChild(s);
   }
-  setTimeout(()=>{$('#splash').classList.add('hide');setTimeout(()=>$('#splash').style.display='none',600)},2200);
+  setTimeout(()=>{
+    const splash=$('#splash');
+    splash.style.opacity='0';
+    splash.style.transform='scale(1.1)';
+    splash.style.pointerEvents='none';
+    setTimeout(()=>{splash.style.display='none';},600);
+  },2200);
 }
 // ===== NAV =====
 function switchTab(tab){
