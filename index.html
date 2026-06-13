@@ -287,8 +287,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .tip-box{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:12px;padding:16px;margin-top:12px;font-size:13px;line-height:1.7;color:#E65100}
 .dark .tip-box{background:linear-gradient(135deg,#3E2723,#4E342E);color:#FFB74D}
 .section-gap{height:12px}
+/* Back to top */
+.back-top{position:fixed;bottom:calc(var(--nav-h) + 20px);right:16px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;border:none;box-shadow:0 2px 8px rgba(124,131,253,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0;transform:translateY(20px);transition:all .3s ease;z-index:99}
+.back-top.show{opacity:1;transform:translateY(0)}
+.back-top:active{transform:scale(.9)}
+/* Loading */
+.loading{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(245,240,235,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.dark .loading{background:rgba(26,26,46,.85)}
+.loading.active{display:flex}
+.spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{color:var(--text2);font-size:14px;letter-spacing:2px}
 /* Scrollbar */
 ::-webkit-scrollbar{width:0}
+/* Share Modal */
+.share-modal{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:100%;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}
+.share-modal.active{display:flex}
+.poster{background:linear-gradient(135deg,#302B63,#24243E,#0F0C29);border-radius:20px;padding:32px 24px;width:100%;max-width:340px;text-align:center;color:#fff;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.poster .poster-stars{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none}
+.poster .poster-star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 2s infinite}
+.poster .poster-date{font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:8px;position:relative}
+.poster .poster-zodiac{font-size:48px;margin-bottom:4px;position:relative}
+.poster .poster-name{font-size:22px;font-weight:700;margin-bottom:2px;position:relative}
+.poster .poster-score{font-size:56px;font-weight:800;margin:12px 0;background:linear-gradient(135deg,#FFD700,#FF8E53);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative}
+.poster .poster-score-label{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:16px;position:relative}
+.poster .poster-items{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;margin-bottom:16px}
+.poster .poster-item{text-align:center}
+.poster .poster-item .p-icon{font-size:20px;margin-bottom:2px}
+.poster .poster-item .p-label{font-size:10px;color:rgba(255,255,255,0.5)}
+.poster .poster-item .p-val{font-size:13px;font-weight:600;margin-top:2px}
+.poster .poster-qrcode{background:#fff;border-radius:8px;padding:6px;margin:12px auto 0;width:64px;height:64px;display:flex;align-items:center;justify-content:center;position:relative}
+.poster .poster-qrcode div{width:48px;height:48px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.poster .poster-tip{font-size:10px;color:rgba(255,255,255,0.4);margin-top:8px;position:relative}
+.poster-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10}
+.poster-close:hover{background:rgba(255,255,255,0.25)}
+.poster-actions{display:flex;gap:12px;margin-top:20px;position:relative;z-index:10}
+.poster-btn{flex:1;padding:12px 16px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:transform .2s}
+.poster-btn.primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
+.poster-btn.secondary{background:rgba(255,255,255,0.15);color:#fff}
+.poster-btn:active{transform:scale(0.96)}
+.poster-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);background:rgba(45,45,58,0.95);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;text-align:center;max-width:280px;animation:toastIn .3s ease;z-index:210}
+.poster-hint .hint-icon{font-size:24px;margin-bottom:4px}
 /* Zodiac page grid */
 .zodiac-list-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px}
 .zodiac-list-item{background:var(--card);border-radius:var(--radius);padding:16px 8px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
@@ -329,6 +368,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden"></div>
 <!-- Toast -->
 <div id="toast" class="toast" style="display:none"></div>
+<!-- Loading -->
+<div id="loading" class="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">正在测算中...</div>
+</div>
 <!-- Main Pages -->
 <div id="page-home" class="page active">
   <div class="banner wave" id="homeBanner">
@@ -365,7 +409,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
     <div class="profile-avatar float-anim">👤</div>
     <div class="profile-name">星缘用户</div>
     <div class="profile-id">ID: 20240611</div>
-    <div style="margin-top:12px"><span class="badge">✨ 星座达人</span></div>
+    <div style="margin-top:12px" id="profileZodiacBadge"><span class="badge">✨ 星座达人</span></div>
   </div>
   <div class="profile-menu">
     <div class="pm-item ripple" onclick="openSub('settings')"><span class="pm-icon">⚙️</span><span class="pm-text">设置</span><span class="pm-arrow">›</span></div>
@@ -393,6 +437,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div class="sub-page" id="sub-settings"></div>
 <div class="sub-page" id="sub-bt-detail"></div>
 <div class="sub-page" id="sub-favorites"></div>
+<!-- Back to top -->
+<button class="back-top" id="backTop" onclick="scrollToTop()">↑</button>
 <!-- Bottom Nav -->
 <div id="bottomNav">
   <div class="nav-item active ripple" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span>首页</span></div>
@@ -465,7 +511,34 @@ const DREAMS=[
 {keyword:'钥匙',emoji:'🔑',meaning:'钥匙象征解决方案和机会。找到钥匙代表你即将发现解决问题的方法。丢失钥匙暗示你感到无助或错过了某个机会。',category:'物品'},
 {keyword:'月亮',emoji:'🌙',meaning:'月亮代表女性能量、直觉和潜意识。满月象征圆满和完成，新月代表新的开始。月光指引方向，暗示你的直觉正在引导你。',category:'自然'},
 {keyword:'星星',emoji:'⭐',meaning:'星星象征希望、梦想和指引。看到满天繁星预示美好的未来。流星代表转瞬即逝的机会。一颗明亮的星暗示你有一个重要的目标。',category:'自然'},
-{keyword:'楼梯',emoji:'🪜',meaning:'楼梯代表人生的进展和提升。上楼梯象征进步和成长，下楼梯可能暗示退步或深入潜意识。楼梯的难易程度反映你当前的处境。',category:'场景'}
+{keyword:'楼梯',emoji:'🪜',meaning:'楼梯代表人生的进展和提升。上楼梯象征进步和成长，下楼梯可能暗示退步或深入潜意识。楼梯的难易程度反映你当前的处境。',category:'场景'},
+{keyword:'老虎',emoji:'🐯',meaning:'梦见老虎象征力量、威严和潜在的威胁。老虎代表你内心强大的力量，也可能暗示生活中有强势的人物。驯服老虎说明你能够掌控强大的力量。',category:'动物'},
+{keyword:'蝴蝶',emoji:'🦋',meaning:'蝴蝶象征蜕变和美丽。梦见蝴蝶通常预示美好的转变即将发生，也可能代表浪漫的爱情。蝴蝶飞舞代表自由和轻松的心境。',category:'动物'},
+{keyword:'蜘蛛',emoji:'🕷️',meaning:'蜘蛛象征创造力、耐心和命运的编织。梦见蜘蛛可能暗示你正在精心策划某件事。蜘蛛网代表复杂的人际关系或困境。',category:'动物'},
+{keyword:'鸟',emoji:'🐦',meaning:'鸟象征自由、灵魂和消息。飞翔的鸟代表对自由的渴望，笼中的鸟暗示感到束缚。鸟鸣可能预示好消息即将到来。',category:'动物'},
+{keyword:'马',emoji:'🐴',meaning:'马象征力量、速度和自由。骑马代表掌控自己的方向和动力。野马暗示难以控制的能量或情感。白马通常象征纯洁和灵性。',category:'动物'},
+{keyword:'山',emoji:'⛰️',meaning:'山象征挑战、目标和稳定。攀登代表面对困难并努力克服。山顶预示成功和成就感。山崩可能暗示你感到基础不稳或压力过大。',category:'自然'},
+{keyword:'海',emoji:'🌊',meaning:'大海象征潜意识和情感的深度。平静的海代表内心安宁，波涛汹涌暗示情感波动。在海边漫步通常预示放松和疗愈。',category:'自然'},
+{keyword:'森林',emoji:'🌲',meaning:'森林象征未知、探索和潜意识。在森林中迷路暗示感到迷茫。阳光穿透树林代表希望和指引。森林中的动物往往代表本能和直觉。',category:'自然'},
+{keyword:'雪',emoji:'❄️',meaning:'雪象征纯洁、宁静和新的开始。大雪可能暗示情感的冷却或隔离。融化的雪代表障碍消除和情感释放。玩雪通常预示轻松愉快的时光。',category:'自然'},
+{keyword:'彩虹',emoji:'🌈',meaning:'彩虹象征希望、美好和转机。梦见彩虹通常预示困难即将过去，美好的事物即将到来。双彩虹代表双倍的好运和祝福。',category:'自然'},
+{keyword:'戒指',emoji:'💍',meaning:'戒指象征承诺、完整和永恒。找到戒指可能预示新的机会或关系。丢失戒指暗示对承诺的担忧。金戒指通常与财富和价值有关。',category:'物品'},
+{keyword:'书',emoji:'📖',meaning:'书象征知识、智慧和人生经验。读书代表学习和成长。写书暗示你有重要的想法需要表达。旧书可能代表过去的记忆和经验。',category:'物品'},
+{keyword:'衣服',emoji:'👗',meaning:'衣服代表自我形象和外在表现。新衣服象征新的开始或身份转变。旧衣服可能暗示对过去的留恋。不合身的衣服暗示你感到不适应当前角色。',category:'物品'},
+{keyword:'桥',emoji:'🌉',meaning:'桥象征过渡、连接和转变。过桥代表从一种状态过渡到另一种状态。断桥暗示转变过程中的困难。美丽的桥预示顺利的过渡。',category:'场景'},
+{keyword:'学校',emoji:'🏫',meaning:'学校象征学习、成长和社会化。梦见回到学校可能暗示你正在学习新事物或感到被评判。考试代表对能力的焦虑。同学往往代表竞争和比较。',category:'场景'},
+{keyword:'医院',emoji:'🏥',meaning:'医院象征治愈、脆弱和需要照顾。梦见自己住院可能暗示身心需要休息和恢复。探望病人代表你关心他人的健康。手术通常象征需要做出重大改变。',category:'场景'},
+{keyword:'电梯',emoji:'🛗',meaning:'电梯象征人生阶段的快速变化。上升代表进步和提升，下降可能暗示退步或深入潜意识。电梯故障暗示你对变化的焦虑或失控感。',category:'场景'},
+{keyword:'牙齿',emoji:'🦷',meaning:'牙齿象征力量、自信和表达能力。掉牙是最常见的焦虑梦之一，通常与外貌焦虑或沟通问题有关。健康的牙齿代表自信和活力。',category:'身体'},
+{keyword:'头发',emoji:'💇',meaning:'头发象征力量、美丽和个性。剪头发代表改变和放下。长发通常与女性魅力相关，脱发可能暗示对衰老或失去吸引力的焦虑。',category:'身体'},
+{keyword:'婴儿',emoji:'👶',meaning:'婴儿象征纯真、新的开始和潜在的创造力。梦见婴儿可能暗示你内心脆弱的一面，或代表新的项目和想法。照顾婴儿代表责任感和 nurturing 本能。',category:'身体'},
+{keyword:'飞行',emoji:'✈️',meaning:'飞行代表自由、超越和新的视角。平稳飞行预示顺利和自由，坠落暗示对失败的恐惧。驾驶飞机说明你掌控着自己的人生方向。',category:'动作'},
+{keyword:'游泳',emoji:'🏊',meaning:'游泳象征在情感中航行和适应。轻松游泳代表你能很好地处理情感问题。溺水暗示被情感淹没。在清澈的水中游泳预示清晰的情感状态。',category:'动作'},
+{keyword:'跳舞',emoji:'💃',meaning:'跳舞象征快乐、表达和和谐。独自跳舞代表自我表达的自由，与他人共舞暗示人际关系的和谐。优美的舞步预示生活的节奏感良好。',category:'动作'},
+{keyword:'逃跑',emoji:'🏃',meaning:'逃跑代表逃避和恐惧。你可能在回避某个问题或责任。成功逃脱预示能够克服困难，被抓到暗示需要面对现实。逃跑的方向往往暗示解决之道。',category:'动作'},
+{keyword:'礼物',emoji:'🎁',meaning:'礼物象征惊喜、认可和他人的善意。收到礼物预示好运和被人重视。送礼物代表你的慷慨和关怀。无法打开的礼物暗示对未知的期待或焦虑。',category:'事件'},
+{keyword:'葬礼',emoji:'⚰️',meaning:'葬礼象征结束、告别和转变。参加葬礼可能代表某个阶段的终结，不一定是负面的。自己的葬礼暗示对自我认知的重大转变。',category:'事件'},
+{keyword:'派对',emoji:'🎉',meaning:'派对象征社交、庆祝和归属感。热闹的派对代表你对社交生活的满足。独自在派对中可能暗示孤独感或被排斥。筹备派对预示即将到来的喜事。',category:'事件'}
 ];
 const BLOOD_TYPES=[
 {type:'A',color:'#FF6B6B',name:'A型血',personality:'A型血的人性格温和、细心谨慎，做事认真负责。他们重视秩序和规则，有很强的社会责任感。内心敏感，善于察言观色，追求完美和和谐。',love:'A型血在爱情中认真而含蓄，重视精神交流。他们需要时间建立信任，一旦确定关系就会非常忠诚。适合与有耐心、温柔的伴侣在一起。',career:'适合需要细心和责任感的工作：医生、教师、会计、编辑、研究员等。做事有条不紊，是团队中最可靠的存在。',health:'A型血的人需要注意心血管健康和压力管理。容易因过度紧张而影响消化系统。建议保持规律作息，适当运动。',match:{A:'互相理解，默契度高',B:'互补性强，但需多沟通',O:'和谐稳定，长久幸福',AB:'有吸引力，需磨合'}},
@@ -504,7 +577,11 @@ const SPREADS=[
 {id:'three',name:'三张牌',emoji:'🎴',desc:'过去·现在·未来',count:3},
 {id:'celtic',name:'凯尔特十字',emoji:'✝️',desc:'全面深入的人生解读',count:10},
 {id:'love',name:'爱情十字',emoji:'💕',desc:'探索爱情的奥秘',count:5},
-{id:'career',name:'事业分析',emoji:'💼',desc:'职业发展指引',count:5}
+{id:'career',name:'事业分析',emoji:'💼',desc:'职业发展指引',count:5},
+{id:'career-cross',name:'事业十字',emoji:'📈',desc:'事业方向全面解析',count:10},
+{id:'wealth',name:'财富阵',emoji:'💰',desc:'财运与投资指引',count:6},
+{id:'health',name:'健康阵',emoji:'🌿',desc:'身心健康解读',count:5},
+{id:'relationship',name:'人际关系阵',emoji:'🤝',desc:'人际互动与社交指引',count:7}
 ];
 const HEAVENLY_STEMS=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const EARTHLY_BRANCHES=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
@@ -516,6 +593,8 @@ const SHICHEN=['子时(23-1)','丑时(1-3)','寅时(3-5)','卯时(5-7)','辰时(
 function $(s){return document.querySelector(s)}
 function $$(s){return document.querySelectorAll(s)}
 function showToast(msg){const t=$('#toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
+function showLoading(){const l=$('#loading');if(l)l.classList.add('active')}
+function hideLoading(){const l=$('#loading');if(l)l.classList.remove('active')}
 function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function pick(arr){return arr[rand(0,arr.length-1)]}
 function getTodayStr(){const d=new Date();const w=['日','一','二','三','四','五','六'];return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 星期${w[d.getDay()]}`}
@@ -538,7 +617,17 @@ function makeStars(n,max=5){let s='';for(let i=0;i<max;i++)s+=`<span class="star
 function getDailyFortune(zodiacId){
   const seed=getDateScore()+zodiacId.charCodeAt(0);
   const r=(n)=>((seed*n*7+13)%100)+1;
-  return{overall:Math.min(99,r(1)),love:Math.min(99,r(2)),career:Math.min(99,r(3)),wealth:Math.min(99,r(4)),health:Math.min(99,r(5)),study:Math.min(99,r(6))};
+  const directions=['东','南','西','北','东南','东北','西南','西北'];
+  const timeSlots=['5:00-7:00','7:00-9:00','9:00-11:00','11:00-13:00','13:00-15:00','15:00-17:00','17:00-19:00','19:00-21:00'];
+  const yiPool=['签约','出行','会友','求财','开业','搬家','装修','结婚','求职','学习','投资','谈判','旅游','购物','健身'];
+  const jiPool=['动土','争吵','借贷','诉讼','冒险','熬夜','冲动消费','跳槽','搬家','手术','远行','赌博','口角','签约','开工'];
+  const luckyDir=directions[(seed*3)%directions.length];
+  const luckyTm=timeSlots[(seed*5)%timeSlots.length];
+  const yiArr=[];const usedYi=new Set();
+  for(let i=0;i<3;i++){const idx=(seed*(i+11))%yiPool.length;if(!usedYi.has(idx)){usedYi.add(idx);yiArr.push(yiPool[idx]);}}
+  const jiArr=[];const usedJi=new Set();
+  for(let i=0;i<2;i++){const idx=(seed*(i+17))%jiPool.length;if(!usedJi.has(idx)){usedJi.add(idx);jiArr.push(jiPool[idx]);}}
+  return{overall:Math.min(99,r(1)),love:Math.min(99,r(2)),career:Math.min(99,r(3)),wealth:Math.min(99,r(4)),health:Math.min(99,r(5)),study:Math.min(99,r(6)),luckyDirection:luckyDir,luckyTime:luckyTm,yi:yiArr,ji:jiArr};
 }
 function getDailyText(zodiacId,type,score){
   const texts={
@@ -778,22 +867,70 @@ function calcPair(){
     dimHtml+=`<div class="dim-bar"><div class="dim-label"><span>${dimNames[k]}</span><span>${v}分</span></div><div class="dim-track"><div class="dim-fill" style="width:${v}%"></div></div></div>`;
   });
   $('#pairDims').innerHTML=dimHtml;
+  // Detailed analysis based on score
   const analysisTexts={
-    high:[`${za.name}和${zb.name}的配对非常出色！你们之间有天然的吸引力，彼此的性格能够形成很好的互补。在日常生活中，你们能够互相理解和支持，共同成长。`,`${za.name}与${zb.name}是天造地设的一对！你们的价值观和人生目标高度一致，在一起能够创造出美好的未来。`],
-    mid:[`${za.name}和${zb.name}的配对还算不错。虽然你们之间有一些差异，但正是这些差异让你们的关系更加有趣。需要双方多沟通、多包容。`,`${za.name}与${zb.name}的配对需要一些磨合。你们各自有独特的优点，学会欣赏对方的不同是关系长久的关键。`],
-    low:[`${za.name}和${zb.name}的配对有一定挑战。你们的性格差异较大，需要付出更多的努力来理解对方。但记住，差异也可以成为成长的动力。`,`${za.name}与${zb.name}的配对需要双方有足够的耐心和包容。虽然道路不易，但只要真心相待，一切皆有可能。`]
+    high:[
+      `${za.name}和${zb.name}的配对非常出色！你们之间有天然的吸引力，彼此的性格能够形成很好的互补。${za.name}的${za.strength.split('、')[0]}与${zb.name}的${zb.strength.split('、')[0]}完美融合，让你们在生活中能够互相激发对方的潜能。`,
+      `${za.name}与${zb.name}是天造地设的一对！你们的价值观和人生目标高度一致，在一起能够创造出美好的未来。这段关系充满了理解、尊重和共同成长的空间。`
+    ],
+    mid:[
+      `${za.name}和${zb.name}的配对还算不错。虽然你们之间有一些差异，但正是这些差异让你们的关系更加有趣。${za.name}的${za.strength.split('、')[0]}可以弥补${zb.name}的${zb.weakness.split('、')[0]}，而${zb.name}的${zb.strength.split('、')[0]}也能帮助${za.name}克服${za.weakness.split('、')[0]}。`,
+      `${za.name}与${zb.name}的配对需要一些磨合。你们各自有独特的优点，学会欣赏对方的不同是关系长久的关键。保持开放的心态，这段关系会越来越好。`
+    ],
+    low:[
+      `${za.name}和${zb.name}的配对有一定挑战。你们的性格差异较大，${za.name}的${za.weakness.split('、')[0]}可能与${zb.name}的${zb.weakness.split('、')[0]}产生冲突。需要付出更多的努力来理解对方，但差异也可以成为成长的动力。`,
+      `${za.name}与${zb.name}的配对需要双方有足够的耐心和包容。虽然道路不易，但只要真心相待，一切皆有可能。关键在于学会换位思考，用爱和理解化解分歧。`
+    ]
   };
   const at=avg>=75?pick(analysisTexts.high):avg>=50?pick(analysisTexts.mid):pick(analysisTexts.low);
-  $('#pairAnalysis').innerHTML=`<h3 style="font-size:16px;font-weight:700;margin-bottom:8px">📋 详细分析</h3><p style="font-size:14px;line-height:1.8;color:var(--text2)">${at}</p>`;
-  const advices=[
-    '建议多进行深度交流，了解彼此的内心世界。',
-    '给彼此适当的空间和时间，不要过于依赖。',
-    '共同培养兴趣爱好，增加相处的乐趣。',
-    '学会欣赏对方的优点，包容对方的缺点。',
-    '在冲突中保持冷静，用沟通代替争吵。'
+  // Compatibility details
+  let compatDetail='';
+  if(avg>=80){
+    compatDetail=`你们在感情上高度契合，彼此能够给予对方足够的安全感和支持。${za.name}的${za.element}元素与${zb.name}的${zb.element}元素形成了良好的能量流动，这让你们的关系充满了活力和温暖。`;
+  }else if(avg>=60){
+    compatDetail=`你们的感情基础不错，但在某些方面需要更多的沟通和理解。${za.name}的${za.quality}特质与${zb.name}的${zb.quality}特质可能会产生一些摩擦，但只要双方愿意调整，这些问题都可以迎刃而解。`;
+  }else{
+    compatDetail=`你们的感情之路可能会比较曲折，${za.name}的${za.element}元素与${zb.name}的${zb.element}元素存在一定的冲突。但这并不意味着没有希望，相反，克服这些困难会让你们的关系更加坚固。`;
+  }
+  $('#pairAnalysis').innerHTML=`<h3 style="font-size:16px;font-weight:700;margin-bottom:8px">📋 详细分析</h3><p style="font-size:14px;line-height:1.8;color:var(--text2)">${at}</p><p style="font-size:14px;line-height:1.8;color:var(--text2);margin-top:8px">${compatDetail}</p>`;
+  // Score-based advice
+  let scoreAdvice=[];
+  if(avg>=80){
+    scoreAdvice=[
+      '你们的配对非常理想，珍惜这段缘分，继续保持彼此的真诚和热情。',
+      '可以尝试一起规划未来，比如旅行、共同的目标等，让关系更加稳固。',
+      '虽然配对指数高，但也要记得给彼此适当的空间，保持独立性。',
+      '在重要的日子里为对方准备惊喜，让感情持续升温。',
+      '共同培养新的兴趣爱好，一起探索未知的世界。'
+    ];
+  }else if(avg>=60){
+    scoreAdvice=[
+      '建议多进行深度交流，了解彼此的内心世界，增进相互理解。',
+      '给彼此适当的空间和时间，不要过于依赖，保持健康的边界。',
+      '共同培养兴趣爱好，增加相处的乐趣，创造更多美好回忆。',
+      '学会欣赏对方的优点，包容对方的缺点，用欣赏代替挑剔。',
+      '在冲突中保持冷静，用沟通代替争吵，寻找双赢的解决方案。'
+    ];
+  }else{
+    scoreAdvice=[
+      '需要更多的耐心和理解，不要急于求成，给彼此足够的时间适应。',
+      '建议从朋友做起，先建立深厚的友谊基础，再慢慢发展为恋人。',
+      '学会换位思考，尝试理解对方的行为模式背后的原因。',
+      '寻找共同的价值观和目标，这是维系关系的重要纽带。',
+      '必要时可以寻求专业的情感咨询，学习更好的沟通技巧。'
+    ];
+  }
+  let advHtml='<h3 style="font-size:16px;font-weight:700;margin-bottom:8px">💡 相处建议</h3>';
+  scoreAdvice.slice(0,3).forEach(a=>{advHtml+=`<p style="font-size:14px;line-height:1.8;color:var(--text2);margin-top:4px">• ${a}</p>`});
+  // Daily tips
+  const dailyTips=[
+    `今天适合${za.name}和${zb.name}一起做一些轻松愉快的事情，比如看电影或散步。`,
+    `建议${za.name}多倾听${zb.name}的想法，而${zb.name}也要学会表达自己的感受。`,
+    `当意见不合时，试着从对方的角度思考问题，会有意想不到的收获。`,
+    `保持幽默感是化解矛盾的良药，不要让小事影响你们的感情。`,
+    `定期安排约会时间，即使在一起很久也要保持恋爱的新鲜感。`
   ];
-  let advHtml='<h3 style="font-size:16px;font-weight:700;margin-bottom:8px">💡 配对建议</h3>';
-  advices.slice(0,3).forEach(a=>{advHtml+=`<p style="font-size:14px;line-height:1.8;color:var(--text2);margin-top:4px">• ${a}</p>`});
+  advHtml+=`<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">🌟 今日相处小贴士</div><p style="font-size:13px;line-height:1.7;color:var(--text2)">${pick(dailyTips)}</p></div>`;
   $('#pairAdvice').innerHTML=advHtml;
   showToast('配对完成！');
 }
@@ -841,12 +978,83 @@ function updateFortune(){
       <div class="lucky-box">
         <div class="lucky-item"><div class="li-icon">🎨</div><div class="li-label">幸运色</div><div class="li-val">${z.luckyColor}</div></div>
         <div class="lucky-item"><div class="li-icon">🔢</div><div class="li-label">幸运数</div><div class="li-val">${z.luckyNum}</div></div>
-        <div class="lucky-item"><div class="li-icon">🧭</div><div class="li-label">幸运方位</div><div class="li-val">${pick(directions)}</div></div>
+        <div class="lucky-item"><div class="li-icon">🧭</div><div class="li-label">幸运方位</div><div class="li-val">${f.luckyDirection}</div></div>
         <div class="lucky-item"><div class="li-icon">💎</div><div class="li-label">幸运物</div><div class="li-val">${z.luckyItem}</div></div>
       </div>
+      <div class="lucky-box" style="margin-top:8px">
+        <div class="lucky-item"><div class="li-icon">⏰</div><div class="li-label">幸运时间</div><div class="li-val">${f.luckyTime}</div></div>
+      </div>
     </div>
-    <div class="tip-box" style="margin:16px">💡 今日小贴士：${tipText}</div>`;
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">📅 今日宜忌</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:120px;background:#E8F5E9;border-radius:12px;padding:12px">
+          <div style="font-size:13px;font-weight:600;color:#2E7D32;margin-bottom:6px">✅ 宜</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">${f.yi.map(y=>`<span class="tag" style="background:#C8E6C9;color:#2E7D32">${y}</span>`).join('')}</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#FFEBEE;border-radius:12px;padding:12px">
+          <div style="font-size:13px;font-weight:600;color:#C62828;margin-bottom:6px">❌ 忌</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">${f.ji.map(j=>`<span class="tag" style="background:#FFCDD2;color:#C62828">${j}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box" style="margin:16px">💡 今日小贴士：${tipText}</div>
+    <button class="pair-btn" onclick="generateFortunePoster()">📸 生成运势海报</button>`;
   $('#fortuneContent').innerHTML=html;
+}
+function generateFortunePoster(){
+  const zid=$('#fortuneZodiac').value;
+  const z=ZODIAC.find(x=>x.id===zid);if(!z)return;
+  const f=getDailyFortune(z.id);
+  const directions=['东','南','西','北','东南','东北','西南','西北'];
+  const luckyDir=pick(directions);
+  let starsHtml='';
+  for(let i=0;i<20;i++){starsHtml+=`<div class="poster-star" style="left:${rand(0,100)}%;top:${rand(0,100)}%;width:${rand(1,2)}px;height:${rand(1,2)}px;animation-delay:${rand(0,2)}s"></div>`}
+  const modal=document.createElement('div');
+  modal.className='share-modal active';
+  modal.id='shareModal';
+  modal.innerHTML=`
+    <div class="poster" id="fortunePoster">
+      <div class="poster-stars">${starsHtml}</div>
+      <div class="poster-date">${getTodayStr()}</div>
+      <div class="poster-zodiac">${z.emoji}</div>
+      <div class="poster-name">${z.name}今日运势</div>
+      <div class="poster-score">${f.overall}</div>
+      <div class="poster-score-label">综合运势评分</div>
+      <div class="poster-items">
+        <div class="poster-item"><div class="p-icon">💕</div><div class="p-label">爱情</div><div class="p-val">${f.love}</div></div>
+        <div class="poster-item"><div class="p-icon">💼</div><div class="p-label">事业</div><div class="p-val">${f.career}</div></div>
+        <div class="poster-item"><div class="p-icon">💰</div><div class="p-label">财运</div><div class="p-val">${f.wealth}</div></div>
+        <div class="poster-item"><div class="p-icon">🏥</div><div class="p-label">健康</div><div class="p-val">${f.health}</div></div>
+      </div>
+      <div class="poster-items">
+        <div class="poster-item"><div class="p-icon">🎨</div><div class="p-label">幸运色</div><div class="p-val">${z.luckyColor}</div></div>
+        <div class="poster-item"><div class="p-icon">🔢</div><div class="p-label">幸运数</div><div class="p-val">${z.luckyNum}</div></div>
+        <div class="poster-item"><div class="p-icon">🧭</div><div class="p-label">幸运方位</div><div class="p-val">${luckyDir}</div></div>
+      </div>
+      <div class="poster-qrcode"><div>✨</div></div>
+      <div class="poster-tip">星缘 · 探索命运的星辰</div>
+    </div>
+    <div class="poster-actions">
+      <button class="poster-btn secondary" onclick="closeShareModal()">关闭</button>
+      <button class="poster-btn primary" onclick="showSaveHint()">保存图片</button>
+    </div>
+    <button class="poster-close" onclick="closeShareModal()">×</button>`;
+  document.body.appendChild(modal);
+}
+function closeShareModal(){
+  const modal=$('#shareModal');
+  if(modal)modal.remove();
+}
+function showSaveHint(){
+  const existing=$('#saveHint');
+  if(existing)existing.remove();
+  const hint=document.createElement('div');
+  hint.className='poster-hint';
+  hint.id='saveHint';
+  hint.innerHTML='<div class="hint-icon">📱</div><div>由于浏览器限制，请长按海报区域截图保存，或使用系统截图工具。</div>';
+  document.body.appendChild(hint);
+  setTimeout(()=>{if(hint)hint.remove()},3000);
 }
 // ===== BAZI =====
 function renderBazi(){
@@ -876,6 +1084,13 @@ function calcBazi(){
   const d=parseInt($('#baziDay').value);
   const sc=parseInt($('#baziShichen').value);
   const gender=$('#baziGender').value;
+  showLoading();
+  setTimeout(()=>{
+    hideLoading();
+    doCalcBazi(name,y,m,d,sc,gender);
+  },1000);
+}
+function doCalcBazi(name,y,m,d,sc,gender){
   // Calculate four pillars
   const yearGan=(y-4)%10;
   const yearZhi=(y-4)%12;
@@ -996,6 +1211,13 @@ function selectSpread(el,count){
   window._tarotCount=count;
 }
 function doTarotReading(){
+  showLoading();
+  setTimeout(()=>{
+    hideLoading();
+    executeTarotReading();
+  },1200);
+}
+function executeTarotReading(){
   const count=window._tarotCount||1;
   const question=$('#tarotQuestion').value;
   const cards=[];
@@ -1007,7 +1229,7 @@ function doTarotReading(){
     const isReversed=Math.random()>0.5;
     cards.push({...TAROT[idx],reversed:isReversed});
   }
-  const posNames=count===1?['指引']:count===3?['过去','现在','未来']:count===5?['现状','挑战','过去','建议','结果']:count===10?['现状','挑战','过去','未来','目标','过去','现在','环境','希望','结果']:['现状','挑战','过去','建议','结果'];
+  const posNames=count===1?['指引']:count===3?['过去','现在','未来']:count===5?['现状','挑战','过去','建议','结果']:count===6?['现状','挑战','机遇','建议','结果','启示']:count===7?['自我','对方','关系','挑战','建议','结果','发展']:count===10?['现状','挑战','过去','未来','目标','过去','现在','环境','希望','结果']:['现状','挑战','过去','建议','结果'];
   let cardsHtml='';
   cards.forEach((card,i)=>{
     cardsHtml+=`<div class="tarot-card-display" style="animation-delay:${i*0.2}s"><div class="tc-emoji">${card.emoji}</div><div class="tc-name">${card.name}</div><div class="tc-pos">${posNames[i]||''} · ${card.reversed?'逆位':'正位'}</div><div class="tc-meaning">${card.reversed?card.reversed:card.upright}</div></div>`;
@@ -1047,7 +1269,133 @@ function renderBlood(){
     <div class="sub-header"><button class="back-btn" onclick="closeSub('blood')">←</button><div class="title">血型分析</div></div>
     <div class="section-title">选择血型</div>
     <div class="bt-grid">${html}</div>
+    <div class="section-title">血型×星座组合</div>
+    <div class="card" style="margin:12px 16px">
+      <div class="form-group" style="margin-bottom:10px">
+        <label style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block">选择血型</label>
+        <select id="comboBlood" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:15px">
+          <option value="">请选择血型</option>
+          ${BLOOD_TYPES.map(bt=>`<option value="${bt.type}">${bt.type}型</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:10px">
+        <label style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block">选择星座</label>
+        <select id="comboZodiac" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:15px">
+          <option value="">请选择星座</option>
+          ${ZODIAC.map(z=>`<option value="${z.id}">${z.emoji} ${z.name}</option>`).join('')}
+        </select>
+      </div>
+      <button class="pair-btn" style="margin:8px auto 0" onclick="calcBloodZodiacCombo()">查看组合分析</button>
+    </div>
+    <div id="comboResult" style="display:none"></div>
     <div style="height:20px"></div>`;
+}
+function calcBloodZodiacCombo(){
+  const bloodType=$('#comboBlood').value;
+  const zodiacId=$('#comboZodiac').value;
+  if(!bloodType||!zodiacId){showToast('请选择血型和星座');return}
+  const bt=BLOOD_TYPES.find(b=>b.type===bloodType);
+  const z=ZODIAC.find(x=>x.id===zodiacId);
+  if(!bt||!z)return;
+  showLoading();
+  setTimeout(()=>{
+    hideLoading();
+    const comboAnalysis=getBloodZodiacAnalysis(bt.type,z.id);
+    $('#comboResult').style.display='block';
+    $('#comboResult').innerHTML=`
+      <div class="card" style="background:linear-gradient(135deg,${bt.color}11,${bt.color}05);border:1px solid ${bt.color}33">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="font-size:48px">🩸${z.emoji}</div>
+          <div>
+            <div style="font-size:18px;font-weight:700">${bt.type}型 × ${z.name}</div>
+            <div style="font-size:13px;color:var(--text3);margin-top:2px">血型与星座组合分析</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+          <span class="tag" style="background:${bt.color}22;color:${bt.color}">${bt.type}型血</span>
+          <span class="tag" style="background:${ELEMENT_COLORS[z.element]}22;color:${ELEMENT_COLORS[z.element]}">${z.element}象星座</span>
+          <span class="tag" style="background:var(--primary)22;color:var(--primary)">守护星：${z.ruler}</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">🎭 组合性格</h3>
+        <p style="font-size:14px;line-height:1.8;color:var(--text2)">${comboAnalysis.personality}</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">💕 爱情模式</h3>
+        <p style="font-size:14px;line-height:1.8;color:var(--text2)">${comboAnalysis.love}</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">💼 事业天赋</h3>
+        <p style="font-size:14px;line-height:1.8;color:var(--text2)">${comboAnalysis.career}</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">🏥 健康注意</h3>
+        <p style="font-size:14px;line-height:1.8;color:var(--text2)">${comboAnalysis.health}</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">⭐ 综合评分</h3>
+        <div class="fortune-row"><span class="fortune-label">性格</span><div class="fortune-stars">${makeStars(comboAnalysis.scores.personality)}</div><span class="fortune-score">${comboAnalysis.scores.personality*20}</span></div>
+        <div class="fortune-row"><span class="fortune-label">爱情</span><div class="fortune-stars">${makeStars(comboAnalysis.scores.love)}</div><span class="fortune-score">${comboAnalysis.scores.love*20}</span></div>
+        <div class="fortune-row"><span class="fortune-label">事业</span><div class="fortune-stars">${makeStars(comboAnalysis.scores.career)}</div><span class="fortune-score">${comboAnalysis.scores.career*20}</span></div>
+        <div class="fortune-row"><span class="fortune-label">人际</span><div class="fortune-stars">${makeStars(comboAnalysis.scores.social)}</div><span class="fortune-score">${comboAnalysis.scores.social*20}</span></div>
+      </div>`;
+    window.scrollTo(0,$('#comboResult').offsetTop-20);
+  },800);
+}
+function getBloodZodiacAnalysis(bloodType,zodiacId){
+  const analyses={
+    'A-aries':{personality:'A型血的谨慎稳重与白羊座的冲动热情形成有趣的对比。你外表看起来温和有礼，但内心充满了冒险精神。做事前会三思而后行，但一旦决定就会全力以赴。',love:'在爱情中，你既渴望激情又需要安全感。你会认真选择伴侣，一旦确定关系就会非常忠诚。适合与能理解你内心矛盾的伴侣在一起。',career:'适合需要耐心和决断力的工作：项目管理、策划、教育等。你能在冲动与谨慎之间找到平衡，做出明智的决策。',health:'注意心血管健康和压力管理。内心的矛盾冲突容易导致精神紧张，建议通过运动来释放压力。',scores:{personality:4,love:4,career:5,social:4}},
+    'A-taurus':{personality:'A型血与金牛座的组合堪称完美。你稳重踏实、细心谨慎，做事有条不紊。对美的鉴赏力极高，追求高品质的生活。',love:'在爱情中，你是忠诚而专一的伴侣。用实际行动表达爱意，为爱人创造舒适的生活环境。',career:'适合金融、艺术、设计等需要审美和耐心的领域。理财能力出色，是团队中可靠的存在。',health:'注意消化系统和颈部健康。保持规律饮食和运动，享受大自然有助于身心健康。',scores:{personality:5,love:5,career:5,social:4}},
+    'A-gemini':{personality:'A型血的稳重与双子座的多变形成独特组合。你思维敏捷但表达谨慎，善于观察和分析。社交场合中你显得温和而有魅力。',love:'在爱情中，你既需要精神交流又渴望稳定。你会用心经营感情，但有时会因过度思考而犹豫不决。',career:'适合媒体、写作、研究等需要分析力和沟通能力的工作。细心与机智的结合让你在职场上游刃有余。',health:'注意呼吸系统和神经系统健康。避免过度思虑，培养放松的习惯。',scores:{personality:4,love:3,career:4,social:5}},
+    'A-cancer':{personality:'A型血与巨蟹座的组合温柔而敏感。你重视家庭和情感，有极强的同理心。做事认真负责，是天生的守护者。',love:'在爱情中，你温柔体贴、忠诚专一。渴望安全感和归属感，会为爱人营造温馨的家。',career:'适合教育、医疗、餐饮等关怀性行业。你的细心和耐心使你成为优秀的教师和医护人员。',health:'注意消化系统和情绪健康。情绪波动时容易影响食欲，建议保持心情平和。',scores:{personality:5,love:5,career:4,social:4}},
+    'A-leo':{personality:'A型血的谦虚与狮子座的自信形成有趣的平衡。你外表温和但内心强大，有领导才能但不张扬。做事认真负责，追求卓越。',love:'在爱情中，你慷慨而浪漫，但表达方式较为含蓄。需要被欣赏和认可，同时也愿意为爱人付出。',career:'适合管理、演艺、时尚等需要领导力和审美的领域。你的稳重与魅力并存，深受他人信赖。',health:'注意心脏和脊椎健康。保持规律作息，适当运动有助于释放压力。',scores:{personality:4,love:4,career:5,social:5}},
+    'A-virgo':{personality:'A型血与处女座的组合追求完美到了极致。你细心、勤奋、有条理，注重每一个细节。谦虚低调，默默付出，追求卓越品质。',love:'在爱情中，你谨慎而细腻，不会轻易投入。一旦确定关系，会用心经营，用细致的关怀表达爱意。',career:'适合编辑、会计、医生、研究员等需要精确和耐心的工作。追求完美的工作态度备受认可。',health:'注意消化系统和肠道健康。容易因过度操心而焦虑，建议学会放松。',scores:{personality:5,love:4,career:5,social:3}},
+    'A-libra':{personality:'A型血与天秤座的组合优雅而和谐。你追求公平与平衡，有极高的社交能力和审美品味。温和有礼，善于调解矛盾。',love:'在爱情中，你浪漫而优雅，渴望和谐的伴侣关系。重视精神契合，但有时过于犹豫不决。',career:'适合法律、外交、艺术、设计等需要审美和社交能力的领域。追求公平正义，善于调解。',health:'注意肾脏和腰部健康。容易因犹豫不决而焦虑，建议多做决定性训练。',scores:{personality:5,love:4,career:4,social:5}},
+    'A-scorpio':{personality:'A型血与天蝎座的组合神秘而深邃。你外表温和但内心强大，有极强的洞察力和意志力。感情深沉，爱恨分明。',love:'在爱情中，你深沉而热烈，渴望灵魂深处的连接。全心全意地爱，但也要求同样的忠诚。',career:'适合侦探、心理学、外科医生、金融分析等需要洞察力和毅力的领域。',health:'注意生殖系统和情绪健康。情绪压抑时容易影响健康，建议找到健康的宣泄方式。',scores:{personality:4,love:5,career:5,social:3}},
+    'A-sagittarius':{personality:'A型血的谨慎与射手座的乐观形成独特组合。你外表开朗但内心细腻，热爱自由但做事有条理。幽默风趣，充满正能量。',love:'在爱情中，你自由而坦诚，但需要时间建立信任。渴望与伴侣一起探索世界，分享人生的冒险。',career:'适合旅行、教育、出版等需要知识和冒险精神的领域。乐观与谨慎的结合让你稳步前进。',health:'注意臀部和肝脏健康。热爱运动但容易受伤，建议做好热身。',scores:{personality:4,love:4,career:4,social:5}},
+    'A-capricorn':{personality:'A型血与摩羯座的组合沉稳而内敛。你有极强的责任感和自律精神，目标明确，务实高效。是最有耐力和毅力的组合之一。',love:'在爱情中，你慢热但忠诚。不善于表达感情，但会用实际行动照顾伴侣。需要学会浪漫和表达。',career:'适合企业管理、金融、建筑工程等需要自律和管理能力的领域。出色的领导者和企业家。',health:'注意骨骼和关节健康。工作压力大时容易忽视健康，建议定期体检。',scores:{personality:5,love:3,career:5,social:3}},
+    'A-aquarius':{personality:'A型血与水瓶座的组合理性而独立。你有独特的思维方式和审美观，善于分析。社交能力出色，但内心世界丰富而神秘。',love:'在爱情中，你需要个人空间和自由。欣赏有独立思想的伴侣，重视精神交流。',career:'适合科技、发明、社会公益、网络等需要创新思维的综合领域。天生的多面手。',health:'注意小腿和血液循环健康。容易因过度思考而失眠，建议保持规律作息。',scores:{personality:4,love:3,career:5,social:4}},
+    'A-pisces':{personality:'A型血与双鱼座的组合温柔而浪漫。你富有想象力和同理心，有极强的艺术天赋。如梦似幻的气质使你成为最具艺术气息的组合。',love:'在爱情中，你浪漫而无私，渴望灵魂伴侣。愿意为爱牺牲，是最温柔的恋人。',career:'适合艺术、音乐、写作、心理咨询等需要想象力和同理心的领域。',health:'注意足部和免疫系统健康。情绪敏感容易受外界影响，建议学会保护自己的能量。',scores:{personality:5,love:5,career:4,social:4}},
+    'B-aries':{personality:'B型血与白羊座的组合充满活力与热情。你开朗大方、勇敢直率，是天生的行动派。独立自主，不喜欢被束缚，有很强的个人魅力。',love:'在爱情中，你热情直接，喜欢主动追求。渴望激情和新鲜感，需要给彼此足够的空间。',career:'适合创业、管理、销售、体育等需要行动力和领导力的领域。天生的行动派，执行力极强。',health:'注意头部和面部健康，容易头痛和牙痛。建议多进行户外运动释放过剩精力。',scores:{personality:5,love:4,career:5,social:5}},
+    'B-taurus':{personality:'B型血与金牛座的组合稳重中带有随性。你重视物质安全，有极强的耐心和毅力。对美有独特的鉴赏力，享受生活中的美好事物。',love:'在爱情中，你忠诚而专一，但不喜欢被控制。用行动表达爱意，喜欢为伴侣创造舒适的生活。',career:'适合金融、艺术、美食、房地产等领域。耐心和毅力使你成为出色的投资者和艺术家。',health:'注意颈部和喉咙健康。饮食方面要注意控制，避免暴饮暴食。',scores:{personality:4,love:4,career:5,social:4}},
+    'B-gemini':{personality:'B型血与双子座的组合聪明机智、善于沟通。你好奇心强，兴趣广泛，是社交场合的焦点。思维敏捷，适应力极强。',love:'在爱情中，你需要精神上的交流和刺激。喜欢有趣的伴侣，讨厌沉闷的关系。',career:'适合媒体、写作、教育、翻译、销售等工作。出色的沟通能力使你成为优秀的演说者。',health:'注意呼吸系统和手臂健康。精神压力较大时容易失眠，建议培养冥想习惯。',scores:{personality:5,love:4,career:4,social:5}},
+    'B-cancer':{personality:'B型血与巨蟹座的组合温柔而独立。你重视家庭和情感，有极强的直觉力。情感丰富，但不喜欢被束缚，追求自由与情感的平衡。',love:'在爱情中，你温柔而深情，但需要个人空间。会为爱人营造温馨的家，同时保持自我。',career:'适合教育、医疗、餐饮、家政等领域。关怀天性与独立精神的结合使你独具特色。',health:'注意消化系统和胸部健康。情绪波动较大时容易影响食欲，建议保持情绪稳定。',scores:{personality:4,love:4,career:4,social:4}},
+    'B-leo':{personality:'B型血与狮子座的组合自信而大方。你慷慨热情，喜欢成为焦点。创造力强，有极强的表现欲，总能用魅力感染身边的人。',love:'在爱情中，你慷慨而浪漫，喜欢盛大表达爱意。需要被欣赏和崇拜，同时也愿意为爱人倾尽所有。',career:'适合演艺、管理、政治、时尚、创意产业。天生的领导力和表现力使你成为出色的表演者。',health:'注意心脏和脊椎健康。精力旺盛但容易过度消耗，建议保持规律作息。',scores:{personality:5,love:5,career:5,social:5}},
+    'B-virgo':{personality:'B型血与处女座的组合追求完美但随性。你分析能力强，做事有条不紊，但不会过于苛求。谦虚低调，默默付出。',love:'在爱情中，你谨慎而细腻，但不会过于挑剔。一旦确定关系，会用心经营，给予伴侣自由。',career:'适合编辑、会计、医生、研究员等工作。出色的分析力和随和的态度使你备受欢迎。',health:'注意消化系统和肠道健康。容易因过度操心而焦虑，建议学会放松。',scores:{personality:4,love:4,career:5,social:4}},
+    'B-libra':{personality:'B型血与天秤座的组合优雅而自由。你追求公平与平衡，有极高的社交能力和审美品味。不拘一格，善于调解矛盾。',love:'在爱情中，你浪漫而优雅，渴望和谐的伴侣关系。重视精神上的契合，喜欢与伴侣分享美好事物。',career:'适合法律、外交、艺术、设计、公关等领域。天生的审美和社交能力使你成为出色的调解者。',health:'注意肾脏和腰部健康。容易因犹豫不决而感到焦虑，建议保持规律运动。',scores:{personality:5,love:4,career:4,social:5}},
+    'B-scorpio':{personality:'B型血与天蝎座的组合神秘而独立。你拥有极强的洞察力和意志力，感情深沉但不受束缚。爱恨分明，是最具魅力的组合之一。',love:'在爱情中，你深沉而热烈，渴望灵魂深处的连接。需要自由和忠诚并存的关系。',career:'适合侦探、心理学、外科医生、研究员、金融分析等领域。出色的洞察力和独立精神。',health:'注意生殖系统和排泄系统健康。情绪压抑时容易影响健康，建议找到健康的情绪宣泄方式。',scores:{personality:4,love:5,career:5,social:4}},
+    'B-sagittarius':{personality:'B型血与射手座的组合乐观开朗、热爱自由。你有哲学家般的思维，追求真理和智慧。幽默风趣，是朋友圈中的开心果。',love:'在爱情中，你自由而坦诚，不喜欢被束缚。渴望与伴侣一起探索世界，分享人生的冒险。',career:'适合旅行、教育、出版、体育、哲学等领域。天生的冒险精神和乐观态度使你成为出色的探险家。',health:'注意臀部和肝脏健康。热爱运动但容易受伤，建议做好热身。',scores:{personality:5,love:4,career:4,social:5}},
+    'B-capricorn':{personality:'B型血与摩羯座的组合沉稳中带有随性。你有极强的责任感和自律精神，但不会过于严肃。务实高效，用实际行动证明自己。',love:'在爱情中，你慢热但忠诚。不善于表达感情，但会用实际行动照顾伴侣，同时给予对方自由。',career:'适合企业管理、政府机关、建筑工程、金融等领域。出色的自律和管理能力。',health:'注意骨骼和关节健康。工作压力大时容易忽视健康，建议定期体检。',scores:{personality:4,love:3,career:5,social:4}},
+    'B-aquarius':{personality:'B型血与水瓶座的组合独立创新、思维超前。你有强烈的人道主义精神，关心社会问题。不拘一格，崇尚自由，是最具前瞻性的组合。',love:'在爱情中，你需要个人空间和自由。欣赏有独立思想的伴侣，重视精神交流。',career:'适合科技、发明、社会公益、航空、网络等领域。天生的创新思维使你成为科技先驱。',health:'注意小腿和血液循环健康。容易因过度思考而失眠，建议保持规律作息。',scores:{personality:5,love:3,career:5,social:4}},
+    'B-pisces':{personality:'B型血与双鱼座的组合温柔浪漫、富有想象力。你有极强的艺术天赋和同理心，能感受到他人的情感。自由而梦幻，是最具艺术气息的组合。',love:'在爱情中，你浪漫而无私，渴望灵魂伴侣。愿意为爱牺牲，同时保持自我的独立性。',career:'适合艺术、音乐、写作、心理咨询、慈善等领域。出色的想象力和同理心。',health:'注意足部和免疫系统健康。情绪敏感容易受外界影响，建议学会保护自己的能量。',scores:{personality:5,love:5,career:4,social:4}},
+    'O-aries':{personality:'O型血与白羊座的组合热情开朗、充满活力。你自信大方，有领导才能，是天生的领导者。勇敢直率，做事果断，执行力极强。',love:'在爱情中，你热情而主动，喜欢浪漫的表达方式。大方慷慨，愿意为爱人付出，但有时过于强势。',career:'适合管理、政治、企业家、运动员等需要领导力和执行力的领域。天生的领导气质。',health:'注意血液和消化系统健康。精力旺盛但容易过度消耗，建议保持运动习惯。',scores:{personality:5,love:4,career:5,social:5}},
+    'O-taurus':{personality:'O型血与金牛座的组合稳重而热情。你重视物质安全，有极强的耐心和毅力。社交能力强，享受生活中的美好事物。',love:'在爱情中，你忠诚而专一，热情而实际。用行动表达爱意，喜欢为伴侣创造舒适的生活。',career:'适合金融、艺术、美食、房地产等领域。耐心和毅力使你成为出色的投资者和艺术家。',health:'注意颈部和喉咙健康。饮食方面要注意控制，避免暴饮暴食。',scores:{personality:4,love:5,career:5,social:5}},
+    'O-gemini':{personality:'O型血与双子座的组合聪明机智、善于社交。你好奇心强，兴趣广泛，是社交场合的焦点。思维敏捷，能同时处理多件事务。',love:'在爱情中，你需要精神上的交流和刺激。喜欢有趣的伴侣，讨厌沉闷的关系。',career:'适合媒体、写作、教育、翻译、销售等工作。出色的沟通能力使你成为优秀的演说者。',health:'注意呼吸系统和手臂健康。精神压力较大时容易失眠，建议培养冥想习惯。',scores:{personality:5,love:4,career:4,social:5}},
+    'O-cancer':{personality:'O型血与巨蟹座的组合温柔而热情。你重视家庭和情感，有极强的直觉力和同理心。社交能力强，对家人和朋友极为忠诚。',love:'在爱情中，你温柔而深情，渴望安全感和归属感。会为爱人营造温馨的家，是最佳的生活伴侣。',career:'适合教育、医疗、餐饮、家政、房地产等领域。关怀天性使你成为优秀的教师和医护人员。',health:'注意消化系统和胸部健康。情绪波动较大时容易影响食欲，建议保持情绪稳定。',scores:{personality:4,love:5,career:4,social:5}},
+    'O-leo':{personality:'O型血与狮子座的组合自信大方、天生王者。你慷慨热情，喜欢成为焦点。创造力强，有极强的表现欲和领导力。',love:'在爱情中，你慷慨而浪漫，喜欢盛大表达爱意。需要被欣赏和崇拜，同时也愿意为爱人倾尽所有。',career:'适合演艺、管理、政治、时尚、创意产业。天生的领导力和表现力使你成为出色的管理者。',health:'注意心脏和脊椎健康。精力旺盛但容易过度消耗，建议保持规律作息。',scores:{personality:5,love:5,career:5,social:5}},
+    'O-virgo':{personality:'O型血与处女座的组合追求完美、注重细节。你分析能力强，做事有条不紊，社交能力也不错。谦虚低调，追求卓越品质。',love:'在爱情中，你谨慎而细腻，不会轻易投入。一旦确定关系，会用心经营，用细致的关怀表达爱意。',career:'适合编辑、会计、医生、研究员、质检等工作。出色的分析力和细心使你成为各领域的专家。',health:'注意消化系统和肠道健康。容易因过度操心而焦虑，建议学会放松。',scores:{personality:4,love:4,career:5,social:4}},
+    'O-libra':{personality:'O型血与天秤座的组合优雅和谐、社交达人。你追求公平与平衡，有极高的社交能力和审美品味。温和有礼，总是给人留下美好印象。',love:'在爱情中，你浪漫而优雅，渴望和谐的伴侣关系。重视精神上的契合，喜欢与伴侣分享美好事物。',career:'适合法律、外交、艺术、设计、公关等领域。天生的审美和社交能力使你成为出色的调解者。',health:'注意肾脏和腰部健康。容易因犹豫不决而感到焦虑，建议多做决定性训练。',scores:{personality:5,love:4,career:4,social:5}},
+    'O-scorpio':{personality:'O型血与天蝎座的组合神秘深邃、魅力十足。你拥有极强的洞察力和意志力，意志坚定，一旦确定目标就会全力以赴。',love:'在爱情中，你深沉而热烈，渴望灵魂深处的连接。全心全意地爱，但也要求同样的忠诚。',career:'适合侦探、心理学、外科医生、研究员、金融分析等领域。出色的洞察力和毅力。',health:'注意生殖系统和排泄系统健康。情绪压抑时容易影响健康，建议找到健康的情绪宣泄方式。',scores:{personality:4,love:5,career:5,social:4}},
+    'O-sagittarius':{personality:'O型血与射手座的组合乐观开朗、热爱冒险。你有哲学家般的思维，追求真理和智慧。幽默风趣，永远充满正能量。',love:'在爱情中，你自由而坦诚，不喜欢被束缚。渴望与伴侣一起探索世界，分享人生的冒险。',career:'适合旅行、教育、出版、体育、哲学等领域。天生的冒险精神和乐观态度。',health:'注意臀部和肝脏健康。热爱运动但容易受伤，建议做好热身。',scores:{personality:5,love:4,career:4,social:5}},
+    'O-capricorn':{personality:'O型血与摩羯座的组合沉稳内敛、目标明确。你有极强的责任感和自律精神，社交能力也不错。务实高效，用实际行动证明价值。',love:'在爱情中，你慢热但忠诚。不善于表达感情，但会用实际行动照顾伴侣。需要学会浪漫和表达。',career:'适合企业管理、政府机关、建筑工程、金融等领域。出色的自律和管理能力。',health:'注意骨骼和关节健康。工作压力大时容易忽视健康，建议定期体检。',scores:{personality:4,love:3,career:5,social:4}},
+    'O-aquarius':{personality:'O型血与水瓶座的组合独立创新、思维超前。你有强烈的人道主义精神，关心社会问题。社交能力强，不拘一格，崇尚自由。',love:'在爱情中，你需要个人空间和自由。欣赏有独立思想的伴侣，重视精神交流。',career:'适合科技、发明、社会公益、航空、网络等领域。天生的创新思维使你成为科技先驱。',health:'注意小腿和血液循环健康。容易因过度思考而失眠，建议保持规律作息。',scores:{personality:5,love:3,career:5,social:5}},
+    'O-pisces':{personality:'O型血与双鱼座的组合温柔浪漫、富有想象力。你有极强的艺术天赋和同理心，社交能力也不错。如梦似幻的气质使你极具魅力。',love:'在爱情中，你浪漫而无私，渴望灵魂伴侣。愿意为爱牺牲，是最温柔的恋人。',career:'适合艺术、音乐、写作、心理咨询、慈善等领域。出色的想象力和同理心。',health:'注意足部和免疫系统健康。情绪敏感容易受外界影响，建议学会保护自己的能量。',scores:{personality:5,love:5,career:4,social:5}},
+    'AB-aries':{personality:'AB型血与白羊座的组合理性与热情并存。你性格复杂而有趣，有独特的思维方式。勇敢但会三思而后行，是独特的领导者。',love:'在爱情中，你理性与浪漫并存。既追求精神契合又重视现实条件，需要同时满足理智和情感的需求。',career:'适合需要综合能力的领导岗位：策划、咨询、管理等。天生的多面手，善于在不同领域游刃有余。',health:'注意呼吸系统和心血管健康。情绪波动较大时容易影响免疫力，建议保持心态平和。',scores:{personality:4,love:4,career:5,social:4}},
+    'AB-taurus':{personality:'AB型血与金牛座的组合理性与感性并存。你稳重踏实，有独特的审美观。重视物质安全，但不会被物质束缚。',love:'在爱情中，你理性与浪漫并存。对伴侣有较高要求，需要同时满足理智和情感的需求。',career:'适合策划、咨询、艺术、外交等领域。综合能力出色，善于在不同领域之间游刃有余。',health:'注意消化系统和过敏问题。情绪波动较大时容易影响免疫力，建议保持心态平和。',scores:{personality:4,love:4,career:5,social:4}},
+    'AB-gemini':{personality:'AB型血与双子座的组合聪明机智、理性善变。你有独特的思维方式，善于分析。社交能力出色，但内心世界丰富而神秘。',love:'在爱情中，你理性与浪漫并存。既追求精神契合又重视现实条件，需要有趣的伴侣。',career:'适合策划、咨询、艺术、外交、科研等需要综合能力的工作。天生的多面手。',health:'注意呼吸系统和神经系统健康。容易因过度思考而失眠，建议保持规律作息。',scores:{personality:5,love:3,career:5,social:5}},
+    'AB-cancer':{personality:'AB型血与巨蟹座的组合温柔而理性。你重视家庭和情感，有极强的直觉力。理性与感性并存，是最具同理心的组合之一。',love:'在爱情中，你温柔而深情，但会理性分析。渴望安全感和归属感，同时保持独立思想。',career:'适合教育、医疗、心理咨询、策划等领域。关怀天性与理性分析的结合使你独具优势。',health:'注意消化系统和免疫系统健康。情绪波动较大时容易影响免疫力，建议保持心态平和。',scores:{personality:4,love:4,career:4,social:4}},
+    'AB-leo':{personality:'AB型血与狮子座的组合自信而理性。你有领导才能，但会理性决策。创造力强，有极强的表现欲，但不会过于自我中心。',love:'在爱情中，你慷慨而浪漫，但会理性选择伴侣。需要被欣赏和崇拜，同时重视精神契合。',career:'适合管理、策划、演艺、时尚等需要领导力和综合能力的领域。',health:'注意心脏和脊椎健康。精力旺盛但容易过度消耗，建议保持规律作息。',scores:{personality:4,love:4,career:5,social:5}},
+    'AB-virgo':{personality:'AB型血与处女座的组合追求完美、理性分析。你注重细节，做事有条不紊，善于分析。谦虚低调，追求卓越品质。',love:'在爱情中，你谨慎而细腻，会理性分析伴侣。一旦确定关系，会用心经营，但有时会过于挑剔。',career:'适合编辑、会计、医生、研究员、策划等工作。出色的分析力和追求完美使你成为专家。',health:'注意消化系统和肠道健康。容易因过度操心而焦虑，建议学会放松。',scores:{personality:4,love:3,career:5,social:3}},
+    'AB-libra':{personality:'AB型血与天秤座的组合优雅理性、追求平衡。你有极高的社交能力和审美品味，善于分析。温和有礼，善于调解矛盾。',love:'在爱情中，你浪漫而优雅，会理性选择伴侣。重视精神契合，但有时过于犹豫不决。',career:'适合法律、外交、艺术、设计、策划等领域。天生的审美和社交能力使你成为出色的调解者。',health:'注意肾脏和腰部健康。容易因犹豫不决而感到焦虑，建议保持规律运动。',scores:{personality:5,love:4,career:4,social:5}},
+    'AB-scorpio':{personality:'AB型血与天蝎座的组合神秘深邃、理性洞察。你拥有极强的洞察力和意志力，善于分析。感情深沉，爱恨分明。',love:'在爱情中，你深沉而热烈，但会理性分析。渴望灵魂深处的连接，同时保持独立思想。',career:'适合侦探、心理学、外科医生、研究员、金融分析等领域。出色的洞察力和理性分析能力。',health:'注意生殖系统和免疫系统健康。情绪压抑时容易影响健康，建议找到健康的情绪宣泄方式。',scores:{personality:4,love:4,career:5,social:3}},
+    'AB-sagittarius':{personality:'AB型血与射手座的组合乐观理性、热爱自由。你有哲学家般的思维，追求真理和智慧。理性与冒险精神并存，充满正能量。',love:'在爱情中，你自由而坦诚，会理性选择伴侣。渴望与伴侣一起探索世界，分享人生的冒险。',career:'适合旅行、教育、出版、策划、哲学等领域。天生的冒险精神和理性思维。',health:'注意臀部和肝脏健康。热爱运动但容易受伤，建议做好热身。',scores:{personality:4,love:3,career:4,social:4}},
+    'AB-capricorn':{personality:'AB型血与摩羯座的组合沉稳理性、目标明确。你有极强的责任感和自律精神，善于分析。务实高效，用实际行动证明价值。',love:'在爱情中，你慢热但忠诚。不善于表达感情，但会用实际行动照顾伴侣，同时保持理性。',career:'适合企业管理、策划、金融、科研等领域。出色的自律和理性分析能力。',health:'注意骨骼和关节健康。工作压力大时容易忽视健康，建议定期体检。',scores:{personality:4,love:3,career:5,social:3}},
+    'AB-aquarius':{personality:'AB型血与水瓶座的组合独立创新、理性超前。你有强烈的人道主义精神，关心社会问题。理性与独立并存，是最具前瞻性的组合。',love:'在爱情中，你需要个人空间和自由。欣赏有独立思想的伴侣，重视精神交流和理性沟通。',career:'适合科技、发明、社会公益、策划、网络等领域。天生的创新思维和理性分析能力。',health:'注意小腿和血液循环健康。容易因过度思考而失眠，建议保持规律作息。',scores:{personality:5,love:3,career:5,social:4}},
+    'AB-pisces':{personality:'AB型血与双鱼座的组合温柔浪漫、理性梦幻。你有极强的艺术天赋和同理心，善于分析。理性与想象力并存，是最具艺术气息的组合。',love:'在爱情中，你浪漫而无私，但会理性分析。渴望灵魂伴侣，同时保持独立思想。',career:'适合艺术、音乐、写作、心理咨询、策划等领域。出色的想象力和理性分析能力。',health:'注意足部和免疫系统健康。情绪敏感容易受外界影响，建议学会保护自己的能量。',scores:{personality:5,love:4,career:4,social:4}}
+  };
+  const key=bloodType+'-'+zodiacId;
+  return analyses[key]||{personality:bt.personality+' '+z.personality,love:bt.love+' '+z.love,career:bt.career+' '+z.career,health:bt.health+' '+z.health,scores:{personality:4,love:4,career:4,social:4}};
 }
 function renderBtDetail(type){
   const bt=BLOOD_TYPES.find(b=>b.type===type);if(!bt)return;
@@ -1207,21 +1555,29 @@ function calcPhone(){
 // ===== DREAM =====
 function renderDream(){
   let tagsHtml='';
-  DREAMS.forEach(d=>{
-    tagsHtml+=`<div class="dream-tag" onclick="searchDream('${d.keyword}')">${d.emoji} ${d.keyword}</div>`;
+  const categories=['动物','自然','物品','场景','身体','动作','事件'];
+  const catEmojis={'动物':'🐾','自然':'🌿','物品':'📦','场景':'🏞️','身体':'💪','动作':'🏃','事件':'📅'};
+  categories.forEach(cat=>{
+    tagsHtml+=`<div class="dream-tag" onclick="filterDreamCategory('${cat}')">${catEmojis[cat]} ${cat}</div>`;
+  });
+  let hotTagsHtml='';
+  DREAMS.slice(0,12).forEach(d=>{
+    hotTagsHtml+=`<div class="dream-tag" onclick="searchDream('${d.keyword}')">${d.emoji} ${d.keyword}</div>`;
   });
   $('#sub-dream').innerHTML=`
     <div class="sub-header"><button class="back-btn" onclick="closeSub('dream')">←</button><div class="title">周公解梦</div></div>
     <div class="dream-search"><input id="dreamSearchInput" placeholder="搜索梦境关键词..." oninput="searchDream(this.value)"></div>
+    <div class="section-title">分类浏览</div>
+    <div class="dream-tags" id="dreamCategoryTags">${tagsHtml}</div>
     <div class="section-title">热门梦境</div>
-    <div class="dream-tags" id="dreamTags">${tagsHtml}</div>
+    <div class="dream-tags" id="dreamTags">${hotTagsHtml}</div>
     <div id="dreamResults"></div>
     <div style="height:20px"></div>`;
 }
 function searchDream(keyword){
-  if(!keyword){$('#dreamResults').innerHTML='';return}
+  if(!keyword){$('#dreamResults').innerHTML='';$$('.dream-tag').forEach(t=>t.classList.remove('active'));return}
   $$('.dream-tag').forEach(t=>{t.classList.toggle('active',t.textContent.includes(keyword))});
-  const results=DREAMS.filter(d=>d.keyword.includes(keyword)||d.meaning.includes(keyword));
+  const results=DREAMS.filter(d=>d.keyword.includes(keyword)||d.meaning.includes(keyword)||d.category.includes(keyword));
   let html='';
   if(results.length===0){
     html='<div class="dream-result"><h4>🔍 未找到相关梦境</h4><p>请尝试其他关键词，或从上方标签中选择。</p></div>';
@@ -1232,15 +1588,57 @@ function searchDream(keyword){
   }
   $('#dreamResults').innerHTML=html;
 }
+function filterDreamCategory(category){
+  const input=$('#dreamSearchInput');
+  if(input)input.value='';
+  $$('.dream-tag').forEach(t=>{t.classList.toggle('active',t.textContent.includes(category))});
+  const results=DREAMS.filter(d=>d.category===category);
+  let html='';
+  if(results.length===0){
+    html='<div class="dream-result"><h4>🔍 该分类暂无梦境</h4></div>';
+  }else{
+    results.forEach(d=>{
+      html+=`<div class="dream-result"><h4>${d.emoji} 梦见${d.keyword}</h4><p>${d.meaning}</p><div style="margin-top:8px"><span class="tag" style="background:var(--primary)22;color:var(--primary)">${d.category}</span></div></div>`;
+    });
+  }
+  $('#dreamResults').innerHTML=html;
+}
 // ===== SETTINGS =====
 function renderSettings(){
   const isDark=document.body.classList.contains('dark');
+  const savedBirth=localStorage.getItem('userBirthday')||'';
+  let birthYear='',birthMonth='',birthDay='';
+  if(savedBirth){
+    const parts=savedBirth.split('-');
+    if(parts.length===3){birthYear=parts[0];birthMonth=parts[1];birthDay=parts[2];}
+  }
+  let yearOpts='<option value="">请选择</option>';
+  for(let y=1940;y<=2025;y++)yearOpts+=`<option value="${y}"${birthYear==String(y)?' selected':''}>${y}年</option>`;
+  let monthOpts='<option value="">请选择</option>';
+  for(let m=1;m<=12;m++)monthOpts+=`<option value="${m}"${birthMonth==String(m)?' selected':''}>${m}月</option>`;
+  let dayOpts='<option value="">请选择</option>';
+  for(let d=1;d<=31;d++)dayOpts+=`<option value="${d}"${birthDay==String(d)?' selected':''}>${d}日</option>`;
+  const zodiacLabel=getUserZodiacLabel();
   $('#sub-settings').innerHTML=`
     <div class="sub-header"><button class="back-btn" onclick="closeSub('settings')">←</button><div class="title">设置</div></div>
     <div style="padding:16px">
       <div class="setting-item" style="border-radius:var(--radius)">
         <div class="si-left"><span class="si-icon">🌙</span><span class="si-text">深色模式</span></div>
         <div class="toggle${isDark?' on':''}" id="darkToggle" onclick="toggleDark()"></div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">🎂 生日设置</h3>
+        <div class="form-group" style="margin-bottom:10px">
+          <label style="font-size:13px;color:var(--text2);margin-bottom:6px;display:block">出生日期</label>
+          <div style="display:flex;gap:8px">
+            <select id="birthYear" style="flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:14px">${yearOpts}</select>
+            <select id="birthMonth" style="flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:14px">${monthOpts}</select>
+            <select id="birthDay" style="flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:14px">${dayOpts}</select>
+          </div>
+        </div>
+        <div id="zodiacDisplay" style="margin-top:8px;font-size:14px;color:var(--primary);font-weight:600">${zodiacLabel}</div>
+        <button class="pair-btn" style="margin-top:12px;padding:10px 32px;font-size:14px" onclick="saveBirthday()">保存生日</button>
       </div>
       <div style="height:12px"></div>
       <div class="setting-item" style="border-radius:var(--radius)">
@@ -1264,6 +1662,38 @@ function toggleDark(){
   const toggle=$('#darkToggle');
   if(toggle)toggle.classList.toggle('on',isDark);
   showToast(isDark?'已开启深色模式':'已关闭深色模式');
+}
+function saveBirthday(){
+  const year=$('#birthYear').value;
+  const month=$('#birthMonth').value;
+  const day=$('#birthDay').value;
+  if(!year||!month||!day){showToast('请选择完整的出生日期');return}
+  const birthStr=`${year}-${month}-${day}`;
+  localStorage.setItem('userBirthday',birthStr);
+  const label=getUserZodiacLabel();
+  const display=$('#zodiacDisplay');
+  if(display)display.textContent=label;
+  updateProfileZodiac();
+  showToast('生日已保存');
+}
+function getUserZodiacLabel(){
+  const savedBirth=localStorage.getItem('userBirthday');
+  if(!savedBirth)return'设置生日后可查看星座';
+  const parts=savedBirth.split('-');
+  if(parts.length!==3)return'设置生日后可查看星座';
+  const m=parseInt(parts[1]),d=parseInt(parts[2]);
+  const zId=getZodiacByDate(m,d);
+  const z=ZODIAC.find(x=>x.id===zId);
+  return z?`您的星座：${z.emoji} ${z.name}（${z.date}）`:'设置生日后可查看星座';
+}
+function getUserZodiac(){
+  const savedBirth=localStorage.getItem('userBirthday');
+  if(!savedBirth)return null;
+  const parts=savedBirth.split('-');
+  if(parts.length!==3)return null;
+  const m=parseInt(parts[1]),d=parseInt(parts[2]);
+  const zId=getZodiacByDate(m,d);
+  return ZODIAC.find(x=>x.id===zId);
 }
 // ===== FAVORITES =====
 function getFavorites(){
@@ -1407,15 +1837,37 @@ function createConfetti(x,y){
     setTimeout(()=>c.remove(),4000);
   }
 }
+function scrollToTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function initBackTop(){
+  const btn=$('#backTop');
+  if(!btn)return;
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>300){btn.classList.add('show');}else{btn.classList.remove('show');}
+  });
+}
+function updateProfileZodiac(){
+  const badge=$('#profileZodiacBadge');
+  if(!badge)return;
+  const z=getUserZodiac();
+  if(z){
+    badge.innerHTML=`<span class="badge">${z.emoji} ${z.name}</span><span class="badge" style="margin-left:6px">✨ 星座达人</span>`;
+  }else{
+    badge.innerHTML='<span class="badge">✨ 星座达人</span>';
+  }
+}
 function init(){
   // Dark mode
   if(localStorage.getItem('darkMode')==='1')document.body.classList.add('dark');
   initParticles();
   updateFavCount();
+  updateProfileZodiac();
   initHome();
   initZodiacList();
   initDivineTools();
   initUtilTools();
+  initBackTop();
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
