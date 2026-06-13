@@ -245,14 +245,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 </style>
 </head>
 <body>
-<!-- Splash -->
-<div id="splash">
-  <div class="stars" id="splashStars"></div>
-  <div class="logo">✨</div>
-  <h1>星 缘</h1>
-  <p>探索命运的星辰密码</p>
-  <div class="bar-wrap"><div class="bar-fill"></div></div>
-</div>
 <!-- Toast -->
 <div id="toast" class="toast" style="display:none"></div>
 <!-- Main Pages -->
@@ -1146,7 +1138,6 @@ function toggleDark(){
 function init(){
   // Dark mode
   if(localStorage.getItem('darkMode')==='1')document.body.classList.add('dark');
-  initSplash();
   initHome();
   initZodiacList();
   initDivineTools();
