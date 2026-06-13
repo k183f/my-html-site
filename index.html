@@ -474,6 +474,21 @@ const BLOOD_TYPES=[
 {type:'AB',color:'#96CEB4',name:'AB型血',personality:'AB型血的人理性与感性并存，性格复杂而有趣。他们有独特的思维方式和审美观，善于分析。社交能力出色，但内心世界丰富而神秘。',love:'AB型血在爱情中理性与浪漫并存，既追求精神契合又重视现实条件。他们对伴侣有较高的要求，需要同时满足理智和情感的需求。',career:'适合需要综合能力的工作：策划、咨询、艺术、外交、科研等。天生的多面手，善于在不同领域之间游刃有余。',health:'AB型血的人需要注意呼吸系统和过敏问题。情绪波动较大时容易影响免疫力。建议保持心态平和，多做户外运动。',match:{A:'有吸引力，需磨合',B:'有趣组合，充满惊喜',O:'有新鲜感，互补性强',AB:'理解深刻，但可能过于理性'}}
 ];
 const ELEMENT_COLORS={火:'#FF6B6B',土:'#96CEB4',风:'#45B7D1',水:'#7C83FD'};
+const BA_GUA={
+  乾:{name:'乾',emoji:'☰',nature:'天',attribute:'金',meaning:'刚健、创造、领导力、父亲',desc:'乾卦象征天，代表刚健、创造和领导力。具有乾卦特质的人天生具有王者风范，勇于开拓，敢于担当。'},
+  坤:{name:'坤',emoji:'☷',nature:'地',attribute:'土',meaning:'柔顺、包容、承载、母亲',desc:'坤卦象征地，代表柔顺、包容和承载。具有坤卦特质的人宽厚仁慈，善于支持他人，是最佳的合作伙伴。'},
+  震:{name:'震',emoji:'☳',nature:'雷',attribute:'木',meaning:'震动、行动、决断、长男',desc:'震卦象征雷，代表震动和行动。具有震卦特质的人行动力强，敢于突破，善于在变化中抓住机遇。'},
+  巽:{name:'巽',emoji:'☴',nature:'风',attribute:'木',meaning:'柔顺、渗透、谦逊、长女',desc:'巽卦象征风，代表柔顺和渗透。具有巽卦特质的人善于沟通，灵活变通，能够以柔克刚。'},
+  坎:{name:'坎',emoji:'☵',nature:'水',attribute:'水',meaning:'险陷、智慧、流动、中男',desc:'坎卦象征水，代表险陷和智慧。具有坎卦特质的人智慧深邃，善于应对危机，在困境中展现韧性。'},
+  离:{name:'离',emoji:'☲',nature:'火',attribute:'火',meaning:'光明、依附、美丽、中女',desc:'离卦象征火，代表光明和美丽。具有离卦特质的人热情开朗，富有魅力，善于照亮他人。'},
+  艮:{name:'艮',emoji:'☶',nature:'山',attribute:'土',meaning:'静止、稳重、止步、少男',desc:'艮卦象征山，代表静止和稳重。具有艮卦特质的人沉稳可靠，善于守成，是值得信赖的伙伴。'},
+  兑:{name:'兑',emoji:'☱',nature:'泽',attribute:'金',meaning:'喜悦、口舌、和谐、少女',desc:'兑卦象征泽，代表喜悦和和谐。具有兑卦特质的人乐观开朗，善于表达，能够带来欢乐氛围。'}
+};
+const ZODIAC_BAGUA={
+  aries:'震',taurus:'坤',gemini:'巽',cancer:'坎',
+  leo:'离',virgo:'艮',libra:'兑',scorpio:'乾',
+  sagittarius:'震',capricorn:'艮',aquarius:'乾',pisces:'坤'
+};
 const DAILY_QUOTES=[
 {text:'星辰不问赶路人，时光不负有心人。',author:'星缘'},
 {text:'每一个不曾起舞的日子，都是对生命的辜负。',author:'尼采'},
@@ -686,6 +701,7 @@ function renderDetail(zodiacId){
       <div class="info-cell"><div class="ic-label">幸运颜色</div><div class="ic-val">${z.luckyColor}</div></div>
       <div class="info-cell"><div class="ic-label">幸运物</div><div class="ic-val">${z.luckyItem}</div></div>
     </div>
+    ${renderBaguaCard(z.id)}
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">✨ ${z.name}简介</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text2)">${z.description}</p>
@@ -1343,6 +1359,30 @@ function toggleFavDetail(id,name,emoji){
     btn.classList.toggle('active',result);
     btn.textContent=result?'❤️':'🤍';
   }
+}
+function renderBaguaCard(zodiacId){
+  const bgName=ZODIAC_BAGUA[zodiacId];
+  if(!bgName)return'';
+  const bg=BA_GUA[bgName];
+  const z=ZODIAC.find(x=>x.id===zodiacId);
+  const wxColor=ELEMENT_COLORS[z.element]||'#7C83FD';
+  return `<div class="card" style="background:linear-gradient(135deg,${wxColor}11,${wxColor}05);border:1px solid ${wxColor}33">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span style="font-size:22px">${bg.emoji}</span>
+      <span>☯️ 五行八卦 · ${bgName}卦</span>
+    </h3>
+    <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <span class="tag" style="background:${wxColor}22;color:${wxColor}">五行：${z.element}</span>
+      <span class="tag" style="background:${wxColor}22;color:${wxColor}">八卦：${bgName}卦</span>
+      <span class="tag" style="background:${wxColor}22;color:${wxColor}">自然：${bg.nature}</span>
+      <span class="tag" style="background:${wxColor}22;color:${wxColor}">属性：${bg.attribute}</span>
+    </div>
+    <p style="font-size:14px;line-height:1.8;color:var(--text2);margin-bottom:8px">${bg.desc}</p>
+    <div style="font-size:13px;color:var(--text3);padding:10px;background:var(--bg);border-radius:8px">
+      <div style="font-weight:600;color:var(--text);margin-bottom:4px">卦象含义</div>
+      ${bg.meaning}
+    </div>
+  </div>`;
 }
 // ===== INIT =====
 function initParticles(){
