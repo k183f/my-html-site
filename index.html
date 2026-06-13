@@ -197,6 +197,63 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 /* Misc */
 .tag{display:inline-block;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:500;margin:2px}
+/* Floating particles */
+.particle{position:fixed;width:4px;height:4px;background:var(--primary);border-radius:50%;pointer-events:none;opacity:.4;animation:particleFloat 8s linear infinite;z-index:1}
+@keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.4}90%{opacity:.4}100%{transform:translateY(-20px) rotate(360deg);opacity:0}}
+/* Glow effect */
+.glow{position:relative}
+.glow::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(45deg,var(--primary),var(--accent),var(--primary));border-radius:inherit;z-index:-1;opacity:0;transition:opacity .3s;filter:blur(8px)}
+.glow:hover::before{opacity:.5}
+/* Ripple button */
+.ripple{position:relative;overflow:hidden}
+.ripple::after{content:'';position:absolute;width:100%;height:100%;top:0;left:0;background:radial-gradient(circle,rgba(255,255,255,.4) 0%,transparent 70%);transform:scale(0);opacity:0;transition:transform .5s,opacity .5s}
+.ripple:active::after{transform:scale(2);opacity:1;transition:0s}
+/* Shimmer loading */
+.shimmer{background:linear-gradient(90deg,var(--card) 25%,#f0f0f0 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.dark .shimmer{background:linear-gradient(90deg,var(--card) 25%,#333 50%,var(--card) 75%);background-size:200% 100%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Pulse ring */
+.pulse-ring{position:relative}
+.pulse-ring::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;border-radius:50%;border:2px solid var(--primary);animation:pulseRing 2s ease-out infinite}
+@keyframes pulseRing{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
+/* Badge */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
+/* Divider */
+.fancy-divider{display:flex;align-items:center;gap:12px;padding:16px;color:var(--text3);font-size:12px}
+.fancy-divider::before,.fancy-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+/* Floating animation */
+.float-anim{animation:floatY 3s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+/* Rotate animation */
+.rotate-anim{animation:rotate360 10s linear infinite}
+@keyframes rotate360{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* Scale pulse */
+.scale-pulse{animation:scalePulse 2s ease-in-out infinite}
+@keyframes scalePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+/* Glass card */
+.glass{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2)}
+.dark .glass{background:rgba(0,0,0,.2);border-color:rgba(255,255,255,.1)}
+/* Wave decoration */
+.wave{position:relative;overflow:hidden}
+.wave::after{content:'';position:absolute;bottom:0;left:0;width:200%;height:20px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='rgba(124,131,253,0.1)' d='M0,60 C300,120 600,0 900,60 C1200,120 1200,60 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;background-size:600px 20px;animation:waveMove 6s linear infinite}
+@keyframes waveMove{from{background-position-x:0}to{background-position-x:600px}}
+/* Confetti */
+.confetti{position:fixed;width:8px;height:8px;pointer-events:none;z-index:9998;animation:confettiFall 3s ease-out forwards}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+/* Progress ring */
+.progress-ring{width:60px;height:60px}
+.progress-ring circle{fill:none;stroke:var(--border);stroke-width:4}
+.progress-ring .progress{stroke:var(--primary);stroke-linecap:round;transition:stroke-dashoffset .5s;transform:rotate(-90deg);transform-origin:50% 50%}
+/* Tooltip */
+.tooltip{position:relative}
+.tooltip::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%) translateY(-4px);padding:4px 10px;background:var(--text);color:#fff;font-size:11px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.tooltip:hover::after{opacity:1}
+/* Skeleton */
+.skeleton{background:linear-gradient(90deg,var(--border) 25%,#e0e0e0 50%,var(--border) 75%);background-size:200% 100%;border-radius:4px;animation:shimmer 1.5s infinite}
+/* Scroll indicator */
+.scroll-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:20px;height:32px;border:2px solid rgba(255,255,255,.5);border-radius:10px}
+.scroll-indicator::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:rgba(255,255,255,.7);border-radius:2px;animation:scrollDown 1.5s infinite}
+@keyframes scrollDown{0%{opacity:1;top:6px}100%{opacity:0;top:18px}}
 .tag-good{background:#E8F5E9;color:#2E7D32}
 .tag-bad{background:#FFEBEE;color:#C62828}
 .lucky-box{display:flex;gap:12px;flex-wrap:wrap;padding:12px 0}
@@ -245,21 +302,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 </style>
 </head>
 <body>
+<!-- Floating particles container -->
+<div id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden"></div>
 <!-- Toast -->
 <div id="toast" class="toast" style="display:none"></div>
 <!-- Main Pages -->
 <div id="page-home" class="page active">
-  <div class="banner" id="homeBanner">
+  <div class="banner wave" id="homeBanner">
     <div class="stars-bg" id="bannerStars"></div>
     <div class="date" id="bannerDate"></div>
-    <div class="quote" id="bannerQuote"></div>
+    <div class="quote float-anim" id="bannerQuote"></div>
     <div class="quote-author" id="bannerAuthor"></div>
+    <div class="scroll-indicator"></div>
   </div>
   <div class="section-title">十二星座</div>
   <div class="zodiac-grid" id="homeZodiacGrid"></div>
   <div class="section-title">命理工具</div>
   <div class="feat-grid" id="homeFeatGrid"></div>
-  <div class="recommend" id="homeRecommend" onclick="openSub('fortune')">
+  <div class="recommend glow" id="homeRecommend" onclick="openSub('fortune')">
     <div class="rec-tag">今日推荐</div>
     <h3 id="recTitle"></h3>
     <p id="recDesc"></p>
@@ -279,16 +339,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 </div>
 <div id="page-me" class="page">
   <div class="profile-header">
-    <div class="profile-avatar">👤</div>
+    <div class="profile-avatar float-anim">👤</div>
     <div class="profile-name">星缘用户</div>
     <div class="profile-id">ID: 20240611</div>
+    <div style="margin-top:12px"><span class="badge">✨ 星座达人</span></div>
   </div>
   <div class="profile-menu">
-    <div class="pm-item" onclick="openSub('settings')"><span class="pm-icon">⚙️</span><span class="pm-text">设置</span><span class="pm-arrow">›</span></div>
-    <div class="pm-item" onclick="openSub('fortune')"><span class="pm-icon">🌟</span><span class="pm-text">我的星座</span><span class="pm-arrow">›</span></div>
-    <div class="pm-item" onclick="showToast('收藏功能开发中')"><span class="pm-icon">❤️</span><span class="pm-text">我的收藏</span><span class="pm-arrow">›</span></div>
-    <div class="pm-item" onclick="showToast('历史记录开发中')"><span class="pm-icon">📜</span><span class="pm-text">历史记录</span><span class="pm-arrow">›</span></div>
-    <div class="pm-item" onclick="showToast('感谢您的支持！')"><span class="pm-icon">⭐</span><span class="pm-text">给个好评</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="openSub('settings')"><span class="pm-icon">⚙️</span><span class="pm-text">设置</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="openSub('fortune')"><span class="pm-icon">🌟</span><span class="pm-text">我的星座</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="showToast('收藏功能开发中')"><span class="pm-icon">❤️</span><span class="pm-text">我的收藏</span><span class="badge" style="margin-right:8px">NEW</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="showToast('历史记录开发中')"><span class="pm-icon">📜</span><span class="pm-text">历史记录</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="showToast('感谢您的支持！')"><span class="pm-icon">⭐</span><span class="pm-text">给个好评</span><span class="pm-arrow">›</span></div>
+  </div>
+  <div class="fancy-divider">星缘 · 探索命运的星辰</div>
+  <div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">
+    <div class="rotate-anim" style="display:inline-block;font-size:24px;margin-bottom:8px">✨</div>
+    <div>Version 2.0 · Made with 💜</div>
   </div>
 </div>
 <!-- Sub Pages -->
@@ -305,11 +371,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div class="sub-page" id="sub-bt-detail"></div>
 <!-- Bottom Nav -->
 <div id="bottomNav">
-  <div class="nav-item active" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span>首页</span></div>
-  <div class="nav-item" onclick="switchTab('zodiac')"><span class="nav-icon">⭐</span><span>星座</span></div>
-  <div class="nav-item" onclick="switchTab('divine')"><span class="nav-icon">🔮</span><span>占卜</span></div>
-  <div class="nav-item" onclick="switchTab('tools')"><span class="nav-icon">🛠</span><span>工具</span></div>
-  <div class="nav-item" onclick="switchTab('me')"><span class="nav-icon">👤</span><span>我的</span></div>
+  <div class="nav-item active ripple" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span>首页</span></div>
+  <div class="nav-item ripple" onclick="switchTab('zodiac')"><span class="nav-icon">⭐</span><span>星座</span></div>
+  <div class="nav-item ripple" onclick="switchTab('divine')"><span class="nav-icon">🔮</span><span>占卜</span></div>
+  <div class="nav-item ripple" onclick="switchTab('tools')"><span class="nav-icon">🛠</span><span>工具</span></div>
+  <div class="nav-item ripple" onclick="switchTab('me')"><span class="nav-icon">👤</span><span>我的</span></div>
 </div>
 <script>
 // ===== DATA =====
@@ -509,7 +575,7 @@ function initHome(){
   const zg=$('#homeZodiacGrid');
   ZODIAC.forEach(z=>{
     const c=ELEMENT_COLORS[z.element]||'#7C83FD';
-    zg.innerHTML+=`<div class="zodiac-item" onclick="openSub('detail','${z.id}')"><div class="zodiac-icon" style="background:${c}22;color:${c}">${z.emoji}</div><div class="z-name">${z.name}</div><div class="z-date">${z.date}</div></div>`;
+    zg.innerHTML+=`<div class="zodiac-item ripple" onclick="openSub('detail','${z.id}')"><div class="zodiac-icon pulse-ring" style="background:${c}22;color:${c}">${z.emoji}</div><div class="z-name">${z.name}</div><div class="z-date">${z.date}</div></div>`;
   });
   // Feature grid
   const fg=$('#homeFeatGrid');
@@ -524,7 +590,7 @@ function initHome(){
     {icon:'💭',name:'周公解梦',color:'#CE93D8',action:"openSub('dream')"}
   ];
   feats.forEach(f=>{
-    fg.innerHTML+=`<div class="feat-item" onclick="${f.action}"><div class="feat-icon" style="background:${f.color}22;color:${f.color}">${f.icon}</div><div class="f-name">${f.name}</div></div>`;
+    fg.innerHTML+=`<div class="feat-item ripple" onclick="${f.action}"><div class="feat-icon" style="background:${f.color}22;color:${f.color}">${f.icon}</div><div class="f-name">${f.name}</div></div>`;
   });
   // Recommend
   const todayZ=getZodiacByDate(new Date().getMonth()+1,new Date().getDate());
@@ -551,7 +617,7 @@ function initDivineTools(){
     {icon:'✍️',name:'姓名测试',desc:'测算名字吉凶',action:"openSub('name')"}
   ];
   tools.forEach(t=>{
-    g.innerHTML+=`<div class="tool-item" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
+    g.innerHTML+=`<div class="tool-item ripple" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
   });
 }
 // ===== UTIL TOOLS =====
@@ -564,7 +630,7 @@ function initUtilTools(){
     {icon:'🃏',name:'塔罗占卜',desc:'命运之牌指引',action:"openSub('tarot')"}
   ];
   tools.forEach(t=>{
-    g.innerHTML+=`<div class="tool-item" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
+    g.innerHTML+=`<div class="tool-item ripple" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
   });
 }
 // ===== DETAIL =====
@@ -864,6 +930,7 @@ function calcBazi(){
     </div>
   `;
   showToast('八字测算完成！');
+  createConfetti(window.innerWidth/2,window.innerHeight/3);
 }
 // ===== TAROT =====
 function renderTarot(){
@@ -926,6 +993,7 @@ function doTarotReading(){
       <button class="pair-btn" style="margin-top:16px" onclick="doTarotReading()">重新占卜</button>
     </div>`;
   showToast('占卜完成！');
+  createConfetti(window.innerWidth/2,window.innerHeight/2);
 }
 // ===== BLOOD TYPE =====
 function renderBlood(){
@@ -1030,6 +1098,7 @@ function calcName(){
       <p style="font-size:14px;line-height:1.8;color:var(--text2)">${readings[level]}</p>
     </div>`;
   showToast('姓名测试完成！');
+  createConfetti(window.innerWidth/2,window.innerHeight/3);
 }
 // ===== PHONE =====
 function renderPhone(){
@@ -1091,6 +1160,7 @@ function calcPhone(){
       <p style="font-size:14px;line-height:1.8;color:var(--text2)">${pick(suggestions)}</p>
     </div>`;
   showToast('手机号测试完成！');
+  createConfetti(window.innerWidth/2,window.innerHeight/3);
 }
 // ===== DREAM =====
 function renderDream(){
@@ -1154,9 +1224,32 @@ function toggleDark(){
   showToast(isDark?'已开启深色模式':'已关闭深色模式');
 }
 // ===== INIT =====
+function initParticles(){
+  const container=document.getElementById('particles');
+  if(!container)return;
+  const colors=['#7C83FD','#FF6B9D','#FFD700','#00D9C0','#FF8E53'];
+  for(let i=0;i<15;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=rand(2,6);
+    p.style.cssText=`width:${size}px;height:${size}px;left:${rand(0,100)}%;background:${pick(colors)};animation-delay:${rand(0,8)}s;animation-duration:${rand(6,12)}s`;
+    container.appendChild(p);
+  }
+}
+function createConfetti(x,y){
+  const colors=['#7C83FD','#FF6B9D','#FFD700','#00D9C0','#FF8E53','#E040FB'];
+  for(let i=0;i<12;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.cssText=`left:${x+rand(-50,50)}px;top:${y}px;background:${pick(colors)};width:${rand(4,10)}px;height:${rand(4,10)}px;border-radius:${rand(0,50)}%;animation-delay:${rand(0,0.3)}s;animation-duration:${rand(2,4)}s`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
 function init(){
   // Dark mode
   if(localStorage.getItem('darkMode')==='1')document.body.classList.add('dark');
+  initParticles();
   initHome();
   initZodiacList();
   initDivineTools();
