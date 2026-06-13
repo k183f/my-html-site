@@ -254,6 +254,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .scroll-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:20px;height:32px;border:2px solid rgba(255,255,255,.5);border-radius:10px}
 .scroll-indicator::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:rgba(255,255,255,.7);border-radius:2px;animation:scrollDown 1.5s infinite}
 @keyframes scrollDown{0%{opacity:1;top:6px}100%{opacity:0;top:18px}}
+/* Favorite button */
+.fav-btn{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);font-size:20px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;z-index:10}
+.fav-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.1)}
+.fav-btn.active{background:rgba(255,107,157,.3);animation:favPulse .3s ease}
+@keyframes favPulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+/* Favorite list */
+.fav-list{padding:0 16px}
+.fav-item{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;position:relative}
+.fav-item:active{transform:scale(.98)}
+.fav-item .fav-emoji{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--bg)}
+.fav-item .fav-info{flex:1}
+.fav-item .fav-name{font-size:15px;font-weight:600;color:var(--text)}
+.fav-item .fav-type{font-size:12px;color:var(--text3);margin-top:2px}
+.fav-item .fav-date{font-size:11px;color:var(--text3);margin-top:4px}
+.fav-item .fav-del{width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:all .2s}
+.fav-item .fav-del:hover{background:#FFEBEE;color:#C62828}
+.fav-empty{text-align:center;padding:60px 20px;color:var(--text3)}
+.fav-empty .fav-empty-icon{font-size:64px;margin-bottom:16px;opacity:.5}
+.fav-empty .fav-empty-text{font-size:16px;margin-bottom:8px}
+.fav-empty .fav-empty-hint{font-size:13px;opacity:.7}
+/* Toast favorite */
+.toast-fav{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:rgba(45,45,58,.9);color:#fff;padding:10px 20px;border-radius:25px;font-size:14px;z-index:9999;animation:toastIn .3s ease;display:flex;align-items:center;gap:8px}
+.toast-fav .toast-fav-icon{font-size:18px}
 .tag-good{background:#E8F5E9;color:#2E7D32}
 .tag-bad{background:#FFEBEE;color:#C62828}
 .lucky-box{display:flex;gap:12px;flex-wrap:wrap;padding:12px 0}
@@ -347,7 +370,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
   <div class="profile-menu">
     <div class="pm-item ripple" onclick="openSub('settings')"><span class="pm-icon">⚙️</span><span class="pm-text">设置</span><span class="pm-arrow">›</span></div>
     <div class="pm-item ripple" onclick="openSub('fortune')"><span class="pm-icon">🌟</span><span class="pm-text">我的星座</span><span class="pm-arrow">›</span></div>
-    <div class="pm-item ripple" onclick="showToast('收藏功能开发中')"><span class="pm-icon">❤️</span><span class="pm-text">我的收藏</span><span class="badge" style="margin-right:8px">NEW</span><span class="pm-arrow">›</span></div>
+    <div class="pm-item ripple" onclick="openSub('favorites')"><span class="pm-icon">❤️</span><span class="pm-text">我的收藏</span><span class="badge" style="margin-right:8px">NEW</span><span class="pm-arrow">›</span></div>
     <div class="pm-item ripple" onclick="showToast('历史记录开发中')"><span class="pm-icon">📜</span><span class="pm-text">历史记录</span><span class="pm-arrow">›</span></div>
     <div class="pm-item ripple" onclick="showToast('感谢您的支持！')"><span class="pm-icon">⭐</span><span class="pm-text">给个好评</span><span class="pm-arrow">›</span></div>
   </div>
@@ -369,6 +392,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div class="sub-page" id="sub-dream"></div>
 <div class="sub-page" id="sub-settings"></div>
 <div class="sub-page" id="sub-bt-detail"></div>
+<div class="sub-page" id="sub-favorites"></div>
 <!-- Bottom Nav -->
 <div id="bottomNav">
   <div class="nav-item active ripple" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span>首页</span></div>
@@ -643,10 +667,12 @@ function renderDetail(zodiacId){
   Object.entries(z.matchScore).forEach(([k,v])=>{if(v>bestScore){bestScore=v;bestMatch=ZODIAC.find(x=>x.id===k).name}if(v<worstScore){worstScore=v;worstMatch=ZODIAC.find(x=>x.id===k).name}});
   let starsHtml='';
   for(let i=0;i<20;i++){starsHtml+=`<div class="dh-star" style="left:${rand(0,100)}%;top:${rand(0,100)}%;width:${rand(1,2)}px;height:${rand(1,2)}px;animation-delay:${rand(0,2)}s"></div>`}
+  const isFav=isFavorited(z.id,'zodiac');
   $('#sub-detail').innerHTML=`
     <div class="sub-header"><button class="back-btn" onclick="closeSub('detail')">←</button><div class="title">${z.name}</div></div>
-    <div class="detail-header" style="background:linear-gradient(135deg,${c},${c}88,#302B63)">
+    <div class="detail-header" style="background:linear-gradient(135deg,${c},${c}88,#302B63);position:relative">
       <div class="dh-stars">${starsHtml}</div>
+      <button class="fav-btn ${isFav?'active':''}" id="favBtn-detail" onclick="toggleFavDetail('${z.id}','${z.name}','${z.emoji}')">${isFav?'❤️':'🤍'}</button>
       <div class="d-emoji">${z.emoji}</div>
       <div class="d-name">${z.name}</div>
       <div class="d-en">${z.english}</div>
@@ -1223,6 +1249,101 @@ function toggleDark(){
   if(toggle)toggle.classList.toggle('on',isDark);
   showToast(isDark?'已开启深色模式':'已关闭深色模式');
 }
+// ===== FAVORITES =====
+function getFavorites(){
+  try{return JSON.parse(localStorage.getItem('xingyuan_favorites')||'[]')}catch(e){return[]}
+}
+function saveFavorites(favs){
+  localStorage.setItem('xingyuan_favorites',JSON.stringify(favs));
+  updateFavCount();
+}
+function updateFavCount(){
+  const favs=getFavorites();
+  const badge=document.querySelector('.pm-item[onclick*="favorites"] .badge');
+  if(badge){
+    if(favs.length>0){badge.textContent=favs.length;badge.style.display='inline-flex'}
+    else{badge.style.display='none'}
+  }
+}
+function isFavorited(id,type){
+  return getFavorites().some(f=>f.id===id&&f.type===type);
+}
+function toggleFavorite(id,type,name,emoji,extra){
+  let favs=getFavorites();
+  const idx=favs.findIndex(f=>f.id===id&&f.type===type);
+  if(idx>=0){
+    favs.splice(idx,1);
+    saveFavorites(favs);
+    showToastFav('已取消收藏','🤍');
+    return false;
+  }else{
+    favs.unshift({id,type,name,emoji,extra,date:new Date().toLocaleDateString('zh-CN')});
+    saveFavorites(favs);
+    showToastFav('已添加到收藏','❤️');
+    createConfetti(window.innerWidth/2,window.innerHeight/2);
+    return true;
+  }
+}
+function showToastFav(msg,icon){
+  const existing=document.querySelector('.toast-fav');
+  if(existing)existing.remove();
+  const t=document.createElement('div');
+  t.className='toast-fav';
+  t.innerHTML=`<span class="toast-fav-icon">${icon}</span><span>${msg}</span>`;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(-10px)';setTimeout(()=>t.remove(),300)},1500);
+}
+function renderFavorites(){
+  const favs=getFavorites();
+  const container=$('#sub-favorites');
+  if(favs.length===0){
+    container.innerHTML=`<div class="sub-header"><button class="back-btn" onclick="closeSub('favorites')">←</button><div class="title">我的收藏</div></div><div class="fav-empty"><div class="fav-empty-icon">🌟</div><div class="fav-empty-text">还没有收藏</div><div class="fav-empty-hint">点击星座详情页的 ❤️ 收藏喜欢的内容</div></div>`;
+    return;
+  }
+  let html=`<div class="sub-header"><button class="back-btn" onclick="closeSub('favorites')">←</button><div class="title">我的收藏 (${favs.length})</div></div><div class="fav-list">`;
+  favs.forEach(f=>{
+    const typeLabels={zodiac:'星座',fortune:'运势',bazi:'八字',tarot:'塔罗',blood:'血型',name:'姓名',phone:'手机',dream:'解梦'};
+    html+=`<div class="fav-item" onclick="openFavItem('${f.type}','${f.id}')">
+      <div class="fav-emoji">${f.emoji||'⭐'}</div>
+      <div class="fav-info">
+        <div class="fav-name">${f.name}</div>
+        <div class="fav-type">${typeLabels[f.type]||f.type}</div>
+        <div class="fav-date">${f.date}</div>
+      </div>
+      <button class="fav-del" onclick="event.stopPropagation();deleteFavorite('${f.id}','${f.type}')">🗑️</button>
+    </div>`;
+  });
+  html+=`</div>`;
+  container.innerHTML=html;
+}
+function openFavItem(type,id){
+  closeSub('favorites');
+  setTimeout(()=>{
+    if(type==='zodiac')openSub('detail',id);
+    else if(type==='fortune')openSub('fortune',id);
+    else if(type==='bazi')openSub('bazi');
+    else if(type==='tarot')openSub('tarot');
+    else if(type==='blood')openSub('blood');
+    else if(type==='name')openSub('name');
+    else if(type==='phone')openSub('phone');
+    else if(type==='dream')openSub('dream');
+  },300);
+}
+function deleteFavorite(id,type){
+  let favs=getFavorites();
+  favs=favs.filter(f=>!(f.id===id&&f.type===type));
+  saveFavorites(favs);
+  renderFavorites();
+  showToast('已删除');
+}
+function toggleFavDetail(id,name,emoji){
+  const result=toggleFavorite(id,'zodiac',name,emoji,null);
+  const btn=$('#favBtn-detail');
+  if(btn){
+    btn.classList.toggle('active',result);
+    btn.textContent=result?'❤️':'🤍';
+  }
+}
 // ===== INIT =====
 function initParticles(){
   const container=document.getElementById('particles');
@@ -1250,6 +1371,7 @@ function init(){
   // Dark mode
   if(localStorage.getItem('darkMode')==='1')document.body.classList.add('dark');
   initParticles();
+  updateFavCount();
   initHome();
   initZodiacList();
   initDivineTools();
