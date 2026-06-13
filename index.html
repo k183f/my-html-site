@@ -298,6 +298,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{color:var(--text2);font-size:14px;letter-spacing:2px}
+/* Fortune Stick */
+.stick-container{text-align:center;padding:32px 16px}
+.stick-tube{width:100px;height:160px;background:linear-gradient(135deg,#8B4513,#A0522D,#8B4513);border-radius:50px 50px 12px 12px;margin:0 auto 24px;position:relative;box-shadow:0 8px 24px rgba(139,69,19,0.3);display:flex;align-items:center;justify-content:center}
+.stick-tube::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:12px;background:rgba(255,255,255,.15);border-radius:6px}
+.stick-tube.shake{animation:stickShake .8s ease-in-out}
+@keyframes stickShake{0%,100%{transform:rotate(0deg)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-10deg)}60%{transform:rotate(8deg)}75%{transform:rotate(-5deg)}90%{transform:rotate(3deg)}}
+.stick-emoji{font-size:40px;transition:all .3s}
+.stick-tube.shake .stick-emoji{animation:stickEmojiBounce .8s ease-in-out}
+@keyframes stickEmojiBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.stick-btn{display:block;margin:0 auto;padding:14px 48px;background:linear-gradient(135deg,#8B4513,#A0522D);color:#fff;border:none;border-radius:25px;font-size:16px;font-weight:600;cursor:pointer;transition:transform .2s}
+.stick-btn:active{transform:scale(.95)}
+.stick-result{text-align:center;padding:20px 16px;animation:fadeIn .6s ease}
+.stick-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,#8B4513,#D2691E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.stick-level{font-size:16px;font-weight:600;margin-bottom:12px}
+.stick-level.great{color:#4CAF50}
+.stick-level.good{color:#8BC34A}
+.stick-level.mid{color:#FF9800}
+.stick-level.bad{color:#F44336}
+.stick-text{font-size:15px;line-height:1.8;color:var(--text2);margin-bottom:16px}
+.stick-meaning{background:var(--card);border-radius:12px;padding:16px;margin-top:12px;text-align:left;box-shadow:var(--shadow)}
+.stick-meaning h4{font-size:14px;color:var(--primary);margin-bottom:6px}
+.stick-meaning p{font-size:13px;line-height:1.7;color:var(--text2)}
+/* Life Number */
+.ln-form{padding:16px}
+.ln-input-wrap{text-align:center;padding:20px 16px}
+.ln-input-wrap input{width:100%;padding:14px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:16px;text-align:center;letter-spacing:1px}
+.ln-input-wrap input:focus{outline:none;border-color:var(--primary)}
+.ln-result{text-align:center;padding:20px 16px;animation:fadeIn .6s ease}
+.ln-num{display:inline-flex;align-items:center;justify-content:center;width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:48px;font-weight:800;margin-bottom:16px;box-shadow:0 4px 16px rgba(124,131,253,0.3)}
+.ln-title{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.ln-subtitle{font-size:14px;color:var(--text2);margin-bottom:16px}
+.ln-section{background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px;text-align:left;box-shadow:var(--shadow)}
+.ln-section h4{font-size:14px;color:var(--primary);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ln-section p{font-size:13px;line-height:1.7;color:var(--text2)}
+/* Crystal */
+.crystal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px}
+.crystal-card{background:var(--card);border-radius:var(--radius);padding:16px 8px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:var(--shadow);border:2px solid transparent}
+.crystal-card:active{transform:scale(.95)}
+.crystal-card.selected{border-color:var(--primary);background:var(--primary)08}
+.crystal-card .cr-emoji{font-size:36px;margin-bottom:8px;transition:transform .3s}
+.crystal-card:hover .cr-emoji{transform:scale(1.1)}
+.crystal-card .cr-name{font-size:13px;font-weight:600}
+.crystal-card .cr-desc{font-size:10px;color:var(--text3);margin-top:4px}
+.crystal-result{text-align:center;padding:20px 16px;animation:fadeIn .6s ease}
+.crystal-result .cr-big{font-size:64px;margin-bottom:8px}
+.crystal-result .cr-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.crystal-result .cr-sub{font-size:13px;color:var(--primary);margin-bottom:16px}
+.crystal-section{background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px;text-align:left;box-shadow:var(--shadow)}
+.crystal-section h4{font-size:14px;color:var(--primary);margin-bottom:8px}
+.crystal-section p{font-size:13px;line-height:1.7;color:var(--text2)}
 /* Scrollbar */
 ::-webkit-scrollbar{width:0}
 /* Share Modal */
@@ -328,6 +378,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .poster-btn:active{transform:scale(0.96)}
 .poster-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);background:rgba(45,45,58,0.95);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;text-align:center;max-width:280px;animation:toastIn .3s ease;z-index:210}
 .poster-hint .hint-icon{font-size:24px;margin-bottom:4px}
+/* Astro Dice */
+.astro-dice-area{text-align:center;padding:24px 16px}
+.astro-dice-wrap{display:flex;justify-content:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.astro-die{width:90px;height:90px;border-radius:16px;background:linear-gradient(135deg,#302B63,#24243E);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 16px rgba(48,43,99,0.3);transition:transform .3s;position:relative;overflow:hidden}
+.astro-die.spinning{animation:diceSpin .6s ease-in-out 3}
+@keyframes diceSpin{0%{transform:rotateY(0deg)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+.astro-die .ad-icon{font-size:28px;margin-bottom:4px}
+.astro-die .ad-label{font-size:11px;opacity:.7}
+.astro-die .ad-val{font-size:14px;font-weight:700;margin-top:2px}
+.astro-dice-btn{display:block;margin:0 auto;padding:14px 48px;background:linear-gradient(135deg,#7C83FD,#FF6B9D);color:#fff;border:none;border-radius:25px;font-size:16px;font-weight:600;cursor:pointer;transition:transform .2s}
+.astro-dice-btn:active{transform:scale(.95)}
+.astro-dice-result{background:var(--card);border-radius:var(--radius);padding:20px;margin:16px;box-shadow:var(--shadow);animation:fadeIn .5s ease}
+.astro-dice-result h4{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--primary)}
+.astro-dice-result p{font-size:14px;line-height:1.8;color:var(--text2)}
+/* Coin Divination */
+.coin-area{text-align:center;padding:24px 16px}
+.coin-wrap{display:flex;justify-content:center;gap:24px;margin-bottom:24px}
+.coin-item{width:70px;height:70px;border-radius:50%;position:relative;transform-style:preserve-3d;transition:transform .6s}
+.coin-item.flipping{animation:coinFlip .8s ease-in-out}
+@keyframes coinFlip{0%{transform:rotateY(0deg)}50%{transform:rotateY(900deg)}100%{transform:rotateY(1080deg)}}
+.coin-face{position:absolute;width:100%;height:100%;border-radius:50%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.coin-front{background:linear-gradient(135deg,#FFD700,#FFA000);color:#8B4513;border:3px solid #DAA520}
+.coin-back{background:linear-gradient(135deg,#C0C0C0,#808080);color:#444;border:3px solid #A9A9A9}
+.coin-front::after{content:'阳';font-size:22px}
+.coin-back::after{content:'阴';font-size:22px}
+.coin-btn{display:block;margin:0 auto;padding:14px 48px;background:linear-gradient(135deg,#FFD700,#FF8E53);color:#fff;border:none;border-radius:25px;font-size:16px;font-weight:600;cursor:pointer;transition:transform .2s}
+.coin-btn:active{transform:scale(.95)}
+.coin-yao-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin:16px 0}
+.coin-yao{width:120px;height:8px;border-radius:4px;background:var(--border);position:relative;overflow:hidden}
+.coin-yao.yang{background:#FFD700}
+.coin-yao.yin{background:#C0C0C0}
+.coin-yao.yin::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:4px;height:100%;background:var(--bg)}
+.coin-result{background:var(--card);border-radius:var(--radius);padding:20px;margin:16px;box-shadow:var(--shadow);animation:fadeIn .5s ease}
+.coin-result h4{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--primary)}
+.coin-result p{font-size:14px;line-height:1.8;color:var(--text2)}
+/* Color Divination */
+.color-area{padding:16px}
+.color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.color-card{height:100px;border-radius:16px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);position:relative;overflow:hidden}
+.color-card:active{transform:scale(.95)}
+.color-card.selected{transform:scale(1.05);box-shadow:0 8px 24px rgba(0,0,0,0.25);border:3px solid #fff}
+.color-card .cc-name{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);white-space:nowrap}
+.color-result{background:var(--card);border-radius:var(--radius);padding:20px;margin:16px;box-shadow:var(--shadow);animation:fadeIn .5s ease}
+.color-result h4{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--primary)}
+.color-result p{font-size:14px;line-height:1.8;color:var(--text2)}
 /* Zodiac page grid */
 .zodiac-list-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px}
 .zodiac-list-item{background:var(--card);border-radius:var(--radius);padding:16px 8px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
@@ -437,6 +532,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div class="sub-page" id="sub-settings"></div>
 <div class="sub-page" id="sub-bt-detail"></div>
 <div class="sub-page" id="sub-favorites"></div>
+<div class="sub-page" id="sub-fortune-stick"></div>
+<div class="sub-page" id="sub-life-number"></div>
+<div class="sub-page" id="sub-crystal"></div>
+<div class="sub-page" id="sub-astro-dice"></div>
+<div class="sub-page" id="sub-coin"></div>
+<div class="sub-page" id="sub-color"></div>
 <!-- Back to top -->
 <button class="back-top" id="backTop" onclick="scrollToTop()">↑</button>
 <!-- Bottom Nav -->
@@ -486,6 +587,58 @@ const TAROT=[
 {name:'太阳',emoji:'☀️',suit:'大阿卡纳19',upright:'成功、快乐、活力、乐观、光明正大',reversed:'暂时的挫折、过度乐观、缺乏活力、内心阴霾'},
 {name:'审判',emoji:'📯',suit:'大阿卡纳20',upright:'觉醒、重生、召唤、反思、重大决定',reversed:'自我怀疑、逃避反思、拒绝改变、犹豫不决'},
 {name:'世界',emoji:'🌍',suit:'大阿卡纳21',upright:'完成、圆满、成就、整合、新的循环',reversed:'未完成、缺乏结束、延迟成功、不完整'}
+];
+const FORTUNE_STICKS=[
+{num:1,level:'great',title:'上上签',text:'鸿运当头照，吉星高照门。',meaning:'此签大吉，诸事顺遂。事业蒸蒸日上，财运亨通，感情美满。宜把握机遇，积极进取。',advice:'当前运势极佳，适合开展新计划、签约合作。保持谦逊，好运将持续。'},
+{num:2,level:'great',title:'上上签',text:'春风得意马蹄疾，一日看尽长安花。',meaning:'此签主成功在望，心想事成。努力终将获得回报，前程似锦。',advice:'坚持自己的目标，成功就在眼前。适合求职、考试、创业。'},
+{num:3,level:'good',title:'上吉签',text:'柳暗花明又一村，否极泰来喜事频。',meaning:'此签预示转危为安，困境即将过去。新的机会正在出现。',advice:'不要因暂时的困难而气馁，转机即将到来。保持乐观心态。'},
+{num:4,level:'good',title:'上吉签',text:'天道酬勤功不唐捐，日积月累终有成。',meaning:'此签主勤能补拙，持续努力必有收获。适合长期规划。',advice:'脚踏实地，持之以恒。学习、工作都需要耐心积累。'},
+{num:5,level:'great',title:'上上签',text:'紫气东来福满门，贵人相助事事顺。',meaning:'此签大吉，有贵人相助。事业、感情皆有好的发展。',advice:'多结交良师益友，贵人就在身边。把握机会，顺势而为。'},
+{num:6,level:'mid',title:'中平签',text:'平平淡淡才是真，知足常乐心自安。',meaning:'此签主平稳，无大起大落。适合守成，不宜冒险。',advice:'珍惜眼前，知足常乐。不宜做重大改变，维持现状为佳。'},
+{num:7,level:'good',title:'上吉签',text:'守得云开见月明，静待花开终有时。',meaning:'此签预示等待将有回报，耐心是成功的关键。',advice:'目前需要耐心等待，不要急于求成。好事多磨，终有结果。'},
+{num:8,level:'mid',title:'中平签',text:'行到水穷处，坐看云起时。',meaning:'此签主顺其自然，随遇而安。不必强求，该来的会来。',advice:'放下执念，顺其自然。休息调整，等待时机。'},
+{num:9,level:'bad',title:'下签',text:'风雨飘摇路难行，谨慎行事保安宁。',meaning:'此签主波折，需要谨慎行事。避免冲动决策。',advice:'当前不宜冒险，凡事三思而后行。保守为上，避免重大投资。'},
+{num:10,level:'good',title:'上吉签',text:'山重水复疑无路，柳暗花明又一村。',meaning:'此签主绝处逢生，困境中暗藏转机。',advice:'即使处境艰难，也不要放弃希望。转机往往在最意想不到的时候出现。'},
+{num:11,level:'great',title:'上上签',text:'金玉满堂富贵来，福禄双全喜盈门。',meaning:'此签大吉，主财富与福气双至。家庭和睦，事业兴旺。',advice:'财运亨通，可适当投资。但要记得积德行善，福泽绵长。'},
+{num:12,level:'good',title:'上吉签',text:'桃花朵朵开，姻缘天注定。',meaning:'此签主感情运势极佳，单身者有望脱单，恋爱者感情升温。',advice:'敞开心扉，勇敢追求爱情。已婚者要珍惜眼前人。'},
+{num:13,level:'mid',title:'中平签',text:'路遥知马力，日久见人心。',meaning:'此签主需要时间验证，不可急于下结论。',advice:'与人相处要多观察，不要轻易相信。时间会证明一切。'},
+{num:14,level:'bad',title:'下签',text:'乌云遮月暂时暗，静待云散见青天。',meaning:'此签主暂时的不顺，但阴霾终将散去。',advice:'目前的困难是暂时的，不要灰心。调整心态，等待时机。'},
+{num:15,level:'good',title:'上吉签',text:'心想事成万事兴，步步高升前程明。',meaning:'此签主愿望有望实现，事业学业皆有进步。',advice:'明确目标，付诸行动。保持积极心态，成功在望。'},
+{num:16,level:'great',title:'上上签',text:'龙凤呈祥瑞气生，家宅平安福自生。',meaning:'此签大吉，主家庭和睦，平安顺遂。适合搬家、结婚。',advice:'家庭是最重要的港湾。多陪伴家人，家和万事兴。'},
+{num:17,level:'mid',title:'中平签',text:'知足常乐无奢求，平平淡淡度春秋。',meaning:'此签主平淡是真，不要过于追求物质。',advice:'减少欲望，增加感恩。简单的生活也有大大的幸福。'},
+{num:18,level:'good',title:'上吉签',text:'宝剑锋从磨砺出，梅花香自苦寒来。',meaning:'此签主历经磨练终成大器，苦难是财富。',advice:'把困难当作成长的机会。坚持下去，你会变得更强大。'},
+{num:19,level:'bad',title:'下签',text:'波涛汹涌舟难行，暂且收帆待风平浪静。',meaning:'此签主外部环境不利，宜静不宜动。',advice:'暂时按兵不动，观察形势。等时机成熟再行动。'},
+{num:20,level:'great',title:'上上签',text:'天时地利人和聚，万事亨通步步高。',meaning:'此签大吉，主天时地利人和皆备，诸事皆宜。',advice:'这是行动的最佳时机，大胆去做。事业、感情、投资皆可。'},
+{num:21,level:'good',title:'上吉签',text:'喜鹊登枝报佳音，好事将近喜临门。',meaning:'此签主好消息即将到来，充满期待。',advice:'保持愉悦的心情，好消息就在路上。适合期待的事情即将发生。'},
+{num:22,level:'mid',title:'中平签',text:'稳中求进莫急躁，循序渐进自有成。',meaning:'此签主稳扎稳打，不可冒进。',advice:'一步一个脚印，稳扎稳打。不要贪图速成，质量更重要。'},
+{num:23,level:'good',title:'上吉签',text:'海阔凭鱼跃，天高任鸟飞。',meaning:'此签主发展空间广阔，前途无量。',advice:'大胆施展才华，舞台很大。适合跳槽、创业、进修。'},
+{num:24,level:'bad',title:'下签',text:'荆棘满途步维艰，小心驶得万年船。',meaning:'此签主前路坎坷，需要格外小心。',advice:'提高警惕，防范风险。不要轻信他人，凡事多留个心眼。'},
+{num:25,level:'great',title:'上上签',text:'福星高照喜气扬，万事如意享安康。',meaning:'此签大吉，主福气满满，健康平安。',advice:'珍惜当下的幸福，多行善积德。健康是最大的财富。'}
+];
+const LIFE_NUMBERS=[
+{num:1,title:'领导者',trait:'独立、自信、有创造力、天生的领袖',lesson:'学会合作与倾听，不要过于自我中心',career:'企业家、管理者、政治家、创业者、导演',desc:'1号人天生具有领导才能，独立自主，充满自信。你们勇于开创，喜欢做第一个吃螃蟹的人。生命赋予你们创造和引领的使命。',detail:'你们是开拓者，拥有强大的意志力和创造力。不喜欢被约束，渴望自由。有时候可能显得过于强势或自我，需要学会团队合作。'},
+{num:2,title:'协调者',trait:'温和、敏感、善解人意、注重和谐',lesson:'建立自信，不要过度依赖他人',career:'外交官、咨询师、教师、护士、社工、调解员',desc:'2号人天生具有协调能力，善于感知他人情绪。你们是和平使者，能够在冲突中找到平衡点。',detail:'你们拥有敏锐的直觉和同理心，是天生的倾听者。重视人际关系，渴望和谐。需要学会在照顾他人感受的同时，也关注自己的需求。'},
+{num:3,title:'表达者',trait:'乐观、有创意、善于表达、社交能力强',lesson:'学会专注，把想法付诸实践',career:'艺术家、作家、演员、主持人、营销人员、设计师',desc:'3号人充满活力和创造力，善于用各种方式表达自己。你们是天生的艺术家，能给周围带来欢乐。',detail:'你们拥有丰富的想象力和表达能力，喜欢成为焦点。幽默风趣，人缘好。需要学会专注，避免三分钟热度，把创意真正落地。'},
+{num:4,title:'建设者',trait:'踏实、可靠、有条理、重视稳定',lesson:'学会灵活变通，不要过于固执',career:'工程师、会计师、建筑师、项目经理、行政人员',desc:'4号人是最可靠的伙伴，脚踏实地，做事有条不紊。你们是天生的建设者，能够把梦想变为现实。',detail:'你们重视秩序和稳定，做事认真细致。是团队中最值得信赖的人。有时候可能过于保守，需要学会接受变化，适当放松自己。'},
+{num:5,title:'自由者',trait:'热爱自由、适应力强、好奇心旺盛、多才多艺',lesson:'学会承担责任，找到真正的方向',career:'记者、旅行家、销售、顾问、自由职业者、探险家',desc:'5号人热爱自由和冒险，不喜欢被束缚。你们适应力极强，能够在各种环境中生存。',detail:'你们渴望变化和刺激，讨厌一成不变。多才多艺，兴趣广泛。需要学会专注和坚持，找到真正热爱的事业深耕下去。'},
+{num:6,title:'守护者',trait:'有责任感、关爱他人、重视家庭、追求完美',lesson:'学会放手，不要过度承担他人的责任',career:'医生、教师、心理咨询师、营养师、家政服务、慈善工作者',desc:'6号人充满爱心和责任感，是天生的照顾者。你们重视家庭和亲情，愿意为他人付出。',detail:'你们拥有无私的爱心和强烈的责任感。重视和谐与美好，有艺术品味。需要学会设定界限，不要过度牺牲自己，也要接受不完美。'},
+{num:7,title:'探索者',trait:'理性、深思熟虑、追求真理、内省',lesson:'学会敞开心扉，与他人建立深层连接',career:'科学家、研究员、哲学家、心理学家、分析师、程序员',desc:'7号人天生具有求知欲和分析能力，喜欢探索事物的本质。你们是真理的追寻者。',detail:'你们拥有敏锐的洞察力和逻辑思维，喜欢独处和思考。对神秘事物感兴趣。需要学会表达情感，不要把一切都藏在心里。'},
+{num:8,title:'成就者',trait:'有野心、务实、善于组织、追求成功',lesson:'学会平衡物质与精神，找到真正的幸福',career:'CEO、银行家、投资人、律师、房地产商、高管',desc:'8号人具有强烈的事业心和领导力，追求物质和精神的双重成功。你们是天生的管理者。',detail:'你们拥有卓越的组织能力和商业头脑，追求成就和认可。有正义感，重视诚信。需要学会平衡工作与生活，明白成功不仅仅是金钱。'},
+{num:9,title:'人道主义者',trait:'博爱、理想主义、富有同情心、大智慧',lesson:'学会脚踏实地，把理想变为现实',career:'慈善家、艺术家、作家、治疗师、环保工作者、志愿者',desc:'9号人拥有博大的胸怀和崇高的理想，关注人类的福祉。你们是世界的治愈者。',detail:'你们拥有宽广的视野和深刻的智慧，能够理解众生。富有同情心和创造力。需要学会务实，把美好的理想一步步实现，不要好高骛远。'}
+];
+const CRYSTALS=[
+{name:'紫水晶',emoji:'🔮',color:'#9C27B0',energy:'智慧、灵性、平静',healing:'帮助冥想，提升直觉，缓解压力，改善睡眠。适合放在卧室或冥想空间。',desc:'紫水晶是灵性之石，能够开启第三眼，增强直觉和洞察力。它带来内心的平静，驱散负面情绪。'},
+{name:'粉水晶',emoji:'💗',color:'#E91E63',energy:'爱情、温柔、治愈',healing:'吸引爱情，修复情感创伤，增强自信，促进人际关系和谐。适合随身携带或放在床头。',desc:'粉水晶是爱之石，散发着温柔的频率。它打开心轮，让爱与慈悲流动，治愈过去的情感伤痛。'},
+{name:'白水晶',emoji:'💎',color:'#B0BEC5',energy:'净化、放大、清晰',healing:'净化负能量，放大其他水晶能量，提升专注力，增强记忆力。适合放在工作场所。',desc:'白水晶是水晶之王，拥有纯净的振动频率。它是万能的疗愈石，能够净化、放大和保护。'},
+{name:'黑曜石',emoji:'⚫',color:'#37474F',energy:'保护、 grounding、转化',healing:'强力辟邪，吸收负能量，稳定情绪，增强意志力。适合随身携带作为护身符。',desc:'黑曜石是保护之石，如同一面盾牌阻挡负面能量。它帮助我们面对阴影，转化恐惧为力量。'},
+{name:'黄水晶',emoji:'🟡',color:'#FFC107',energy:'财富、自信、活力',healing:'招财进宝，增强自信，提升行动力，改善消化系统。适合放在财位或办公桌上。',desc:'黄水晶是财富之石，散发着太阳般的温暖能量。它激发个人力量，吸引丰盛和成功。'},
+{name:'绿松石',emoji:'🟢',color:'#4CAF50',energy:'疗愈、沟通、幸运',healing:'保护旅行者，增强沟通能力，缓解喉咙不适，带来好运。适合佩戴在颈部。',desc:'绿松石是幸运之石，自古以来被视为神圣的护身符。它连接天地能量，带来健康和好运。'},
+{name:'月光石',emoji:'🌙',color:'#90CAF9',energy:'直觉、女性能量、新生',healing:'平衡情绪，增强女性魅力，促进生育，缓解经期不适。适合女性佩戴。',desc:'月光石与月亮能量共振，象征着循环和新生。它唤醒内在的直觉和女性力量，带来情绪的平衡。'},
+{name:'红玛瑙',emoji:'🔴',color:'#F44336',energy:'勇气、活力、行动力',healing:'增强体力和耐力，提升勇气，改善血液循环，激发热情。适合运动时佩戴。',desc:'红玛瑙是勇气之石，点燃内在的热情和动力。它帮助我们克服恐惧，勇敢地追求目标。'},
+{name:'青金石',emoji:'🔵',color:'#3F51B5',energy:'真理、智慧、表达',healing:'提升表达能力，增强记忆力，缓解头痛，促进自我认知。适合学生和演讲者。',desc:'青金石是智慧之石，连接着更高的意识。它帮助我们发现内在真理，勇敢地表达真实的自己。'},
+{name:'虎眼石',emoji:'🐯',color:'#FF8F00',energy:'决断、保护、清晰',healing:'增强决断力，保护免受负面能量，提升专注力，缓解焦虑。适合面临重要决策时佩戴。',desc:'虎眼石如同老虎的眼睛，锐利而坚定。它帮助我们看清真相，做出明智的决定，同时提供强大的保护。'},
+{name:'翡翠',emoji:'🟩',color:'#2E7D32',energy:'和谐、繁荣、长寿',healing:'促进身心和谐，吸引财富，保护健康，带来好运。适合长期佩戴。',desc:'翡翠是东方圣石，象征着美德和繁荣。它带来身心的平衡，保护佩戴者免受伤害，吸引长久的福气。'},
+{name:'海蓝宝',emoji:'🌊',color:'#00BCD4',energy:'平静、勇气、沟通',healing:'平复情绪，增强勇气表达真实想法，保护喉咙健康，带来海洋般的宁静。适合紧张时握在手中。',desc:'海蓝宝是海洋之石，携带着深海的宁静力量。它帮助我们平静地面对挑战，勇敢地表达内心。'}
 ];
 const DREAMS=[
 {keyword:'蛇',emoji:'🐍',meaning:'梦见蛇通常象征着变革和转变。蛇蜕皮代表新生，可能预示着生活中即将发生重大变化。如果蛇咬了你，可能暗示有隐藏的威胁。水中的蛇代表情感上的变化。',category:'动物'},
@@ -589,6 +742,123 @@ const WU_XING=['木','火','土','金','水'];
 const WX_COLORS=['#4CAF50','#FF5722','#795548','#FFD700','#2196F3'];
 const ZODIAC_ANIMALS=['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
 const SHICHEN=['子时(23-1)','丑时(1-3)','寅时(3-5)','卯时(5-7)','辰时(7-9)','巳时(9-11)','午时(11-13)','未时(13-15)','申时(15-17)','酉时(17-19)','戌时(19-21)','亥时(21-23)'];
+const ASTRO_PLANETS=[
+{name:'太阳',emoji:'☀️',meaning:'代表自我、意志、生命力和核心身份。太阳的位置揭示了你最本质的性格和人生目标。'},
+{name:'月亮',emoji:'🌙',meaning:'代表情感、潜意识、内心需求和安全感。月亮反映了你最真实的情感反应和内心世界。'},
+{name:'水星',emoji:'☿️',meaning:'代表思维、沟通、学习和表达方式。水星影响你的思考模式和与他人的交流方式。'},
+{name:'金星',emoji:'♀️',meaning:'代表爱情、美感、价值观和吸引力。金星揭示了你在感情中的态度和审美偏好。'},
+{name:'火星',emoji:'♂️',meaning:'代表行动力、欲望、勇气和竞争力。火星显示了你的能量表达方式和对目标的追求。'},
+{name:'木星',emoji:'♃',meaning:'代表扩张、幸运、成长和哲学观。木星带来机遇和祝福，是你生命中的贵人星。'},
+{name:'土星',emoji:'♄',meaning:'代表责任、限制、纪律和成熟。土星带来考验，但也赋予你坚韧和成就。'},
+{name:'天王星',emoji:'♅',meaning:'代表变革、创新、独立和突破。天王星带来意想不到的改变和觉醒。'},
+{name:'海王星',emoji:'♆',meaning:'代表梦想、灵性、直觉和幻觉。海王星连接你与更高的意识和创造力。'},
+{name:'冥王星',emoji:'♇',meaning:'代表转化、权力、深层心理重生。冥王星带来深刻的蜕变和内在力量。'}
+];
+const ASTRO_SIGNS=[
+{name:'白羊座',emoji:'♈',meaning:'充满活力和冲劲，勇敢开创，喜欢挑战和冒险，具有领导气质。'},
+{name:'金牛座',emoji:'♉',meaning:'稳重踏实，重视物质和感官享受，忠诚可靠，有极强的耐力。'},
+{name:'双子座',emoji:'♊',meaning:'聪明机智，善于沟通，好奇心强，多才多艺，适应力极佳。'},
+{name:'巨蟹座',emoji:'♋',meaning:'温柔体贴，重视家庭和情感，直觉敏锐，富有同情心和保护欲。'},
+{name:'狮子座',emoji:'♌',meaning:'自信大方，具有王者风范，慷慨热情，创造力强，喜欢成为焦点。'},
+{name:'处女座',emoji:'♍',meaning:'追求完美，注重细节，分析能力强，谦虚低调，做事有条不紊。'},
+{name:'天秤座',emoji:'♎',meaning:'优雅和谐，追求公平与平衡，社交能力强，有极高的审美品味。'},
+{name:'天蝎座',emoji:'♏',meaning:'神秘深邃，洞察力强，意志坚定，感情深沉，爱恨分明。'},
+{name:'射手座',emoji:'♐',meaning:'乐观开朗，热爱自由和冒险，思维开阔，幽默风趣，充满正能量。'},
+{name:'摩羯座',emoji:'♑',meaning:'沉稳内敛，目标明确，责任感强，自律务实，是最有耐力的攀登者。'},
+{name:'水瓶座',emoji:'♒',meaning:'独立创新，思维超前，人道主义，不拘一格，最具前瞻性。'},
+{name:'双鱼座',emoji:'♓',meaning:'温柔浪漫，富有想象力，艺术天赋强，同理心深，如梦似幻。'}
+];
+const ASTRO_HOUSES=[
+{name:'第一宫',emoji:'👤',meaning:'自我宫，代表个人形象、性格、外貌和人生态度。是你展现给世界的样子。'},
+{name:'第二宫',emoji:'💰',meaning:'财帛宫，代表金钱、物质资源、价值观和赚钱能力。反映你对财富的态度。'},
+{name:'第三宫',emoji:'💬',meaning:'兄弟宫，代表沟通、学习、短途旅行和兄弟姐妹关系。是你获取信息的渠道。'},
+{name:'第四宫',emoji:'🏠',meaning:'家庭宫，代表家庭、根源、安全感和内心世界。是你心灵的避风港。'},
+{name:'第五宫',emoji:'🎨',meaning:'恋爱宫，代表创造力、爱情、娱乐和子女。是你表达自我和享受生活的领域。'},
+{name:'第六宫',emoji:'💼',meaning:'工作宫，代表日常工作、健康、服务和习惯。是你履行职责和照顾自己的地方。'},
+{name:'第七宫',emoji:'💕',meaning:'婚姻宫，代表婚姻、合作关系和重要他人。是你与他人建立承诺的领域。'},
+{name:'第八宫',emoji:'🔮',meaning:'转化宫，代表深层情感、共享资源、转化和神秘事物。是你经历重生的领域。'},
+{name:'第九宫',emoji:'✈️',meaning:'迁移宫，代表高等教育、长途旅行、哲学和信仰。是你拓展视野的领域。'},
+{name:'第十宫',emoji:'🏆',meaning:'事业宫，代表事业、社会地位、成就和公众形象。是你实现抱负的舞台。'},
+{name:'第十一宫',emoji:'🤝',meaning:'朋友宫，代表友谊、社交圈、理想和群体活动。是你融入社会的领域。'},
+{name:'第十二宫',emoji:'🌌',meaning:'隐秘宫，代表潜意识、灵性、隐秘和解脱。是你与更高自我连接的领域。'}
+];
+const I_CHING=[
+{name:'乾为天',emoji:'☰',meaning:'乾卦象征天，代表刚健、创造和领导力。大吉之卦，预示事业顺利，前途光明。适合开创、进取，但需防刚愎自用。'},
+{name:'坤为地',emoji:'☷',meaning:'坤卦象征地，代表柔顺、包容和承载。大吉之卦，预示安稳顺遂，厚德载物。适合守成、合作，以柔克刚。'},
+{name:'水雷屯',emoji:'💧⚡',meaning:'屯卦象征初生，代表艰难起步但充满希望。小事吉，大事需谨慎。适合积累力量，等待时机。'},
+{name:'山水蒙',emoji:'⛰️🌫️',meaning:'蒙卦象征启蒙，代表学习和成长的过程。需要良师指引，虚心求教。适合求学、拜师。'},
+{name:'水天需',emoji:'💧☰',meaning:'需卦象征等待，代表耐心和时机。不宜急躁，守正待时。适合蓄力、观望，等待最佳时机。'},
+{name:'天水讼',emoji:'☁️💧',meaning:'讼卦象征争讼，代表冲突和纠纷。需谨慎言行，避免争执。适合和解、退让，不宜诉讼。'},
+{name:'地水师',emoji:'☷💧',meaning:'师卦象征军队，代表组织和纪律。需要严明的领导和团队合作。适合集体行动、项目管理。'},
+{name:'水地比',emoji:'💧☷',meaning:'比卦象征亲近，代表团结和互助。吉卦，预示人际关系和谐。适合合作、结盟、交友。'},
+{name:'风天小畜',emoji:'🌬️☰',meaning:'小畜卦象征小有积蓄，代表缓慢积累。小有成就，但不可冒进。适合理财、储蓄、稳步发展。'},
+{name:'天泽履',emoji:'☰☱',meaning:'履卦象征践行，代表谨慎行事。需脚踏实地，遵循礼仪。适合按规矩办事，步步为营。'},
+{name:'地天泰',emoji:'☷☰',meaning:'泰卦象征通泰，代表天地交合，万事亨通。大吉之卦，预示顺利和谐。适合创业、结婚、重大决策。'},
+{name:'天地否',emoji:'☰☷',meaning:'否卦象征闭塞，代表天地不交，诸事不顺。需忍耐等待，保存实力。不宜冒进，适合韬光养晦。'},
+{name:'天火同人',emoji:'☰🔥',meaning:'同人卦象征和同，代表志同道合。吉卦，预示合作顺利。适合团队建设、共同创业。'},
+{name:'火天大有',emoji:'🔥☰',meaning:'大有卦象征大丰收，代表丰盛和成就。大吉之卦，预示事业辉煌。适合大展宏图，收获成果。'},
+{name:'地山谦',emoji:'☷⛰️',meaning:'谦卦象征谦虚，代表谦逊受益。大吉之卦，预示谦虚使人进步。适合低调行事，虚心学习。'},
+{name:'雷地豫',emoji:'⚡☷',meaning:'豫卦象征愉悦，代表快乐和准备。需居安思危，不可耽于享乐。适合庆祝、休闲，但要保持警觉。'},
+{name:'泽雷随',emoji:'☱⚡',meaning:'随卦象征随从，代表顺应时势。吉卦，预示随遇而安。适合跟随潮流，灵活应变。'},
+{name:'山风蛊',emoji:'⛰️🌬️',meaning:'蛊卦象征腐败，代表积弊和革新。需要彻底改革，除旧布新。适合整顿、改革、清理旧账。'},
+{name:'地泽临',emoji:'☷☱',meaning:'临卦象征临近，代表督导和关怀。吉卦，预示领导有方。适合管理、教育、指导他人。'},
+{name:'风地观',emoji:'🌬️☷',meaning:'观卦象征观瞻，代表观察和审视。需要冷静观察，不可贸然行动。适合调研、评估、制定策略。'},
+{name:'火雷噬嗑',emoji:'🔥⚡',meaning:'噬嗑卦象征咬合，代表执法和决断。需要果断处理，明察秋毫。适合法律事务、果断决策。'},
+{name:'山火贲',emoji:'⛰️🔥',meaning:'贲卦象征装饰，代表文饰和美化。需注意表里如一，不可虚有其表。适合包装、宣传、艺术创作。'},
+{name:'山地剥',emoji:'⛰️☷',meaning:'剥卦象征剥落，代表衰败和剥离。需防微杜渐，保存根基。不宜扩张，适合收缩防守。'},
+{name:'地雷复',emoji:'☷⚡',meaning:'复卦象征回复，代表回归和复兴。吉卦，预示否极泰来。适合重新开始，回归本源。'},
+{name:'天雷无妄',emoji:'☰⚡',meaning:'无妄卦象征无妄，代表真实无伪。需脚踏实地，不可有非分之想。适合诚实经营，按部就班。'},
+{name:'山天大畜',emoji:'⛰️☰',meaning:'大畜卦象征大积蓄，代表积累和蓄养。吉卦，预示厚积薄发。适合学习、储备、等待时机。'},
+{name:'山雷颐',emoji:'⛰️⚡',meaning:'颐卦象征颐养，代表养生和自求口实。需注意身心健康，自力更生。适合养生、学习技能。'},
+{name:'泽风大过',emoji:'☱🌬️',meaning:'大过卦象征大过，代表过度和危机。需谨慎行事，不可冒进。适合危机处理、谨慎决策。'},
+{name:'坎为水',emoji:'☵',meaning:'坎卦象征水，代表险陷和危机。需谨慎应对，保持冷静。适合化解危机，以智取胜。'},
+{name:'离为火',emoji:'☲',meaning:'离卦象征火，代表光明和依附。吉卦，预示前途光明。适合展示才华，依附贵人。'},
+{name:'泽山咸',emoji:'☱⛰️',meaning:'咸卦象征交感，代表感应和情感。吉卦，预示感情和谐。适合恋爱、交友、情感交流。'},
+{name:'雷风恒',emoji:'⚡🌬️',meaning:'恒卦象征恒久，代表持久和稳定。吉卦，预示长久稳定。适合结婚、长期合作、坚持目标。'},
+{name:'天山遁',emoji:'☰⛰️',meaning:'遁卦象征退避，代表隐退和避让。需知进退，保存实力。适合退居幕后，韬光养晦。'},
+{name:'雷天大壮',emoji:'⚡☰',meaning:'大壮卦象征大壮，代表强盛和力量。需防盛极而衰，保持谦逊。适合展现实力，但要节制。'},
+{name:'火地晋',emoji:'🔥☷',meaning:'晋卦象征晋升，代表进步和提升。吉卦，预示步步高升。适合求职、升职、积极进取。'},
+{name:'地火明夷',emoji:'☷🔥',meaning:'明夷卦象征光明受损，代表困境和隐忍。需忍辱负重，等待时机。不宜出头，适合暗中蓄力。'},
+{name:'风火家人',emoji:'🌬️🔥',meaning:'家人卦象征家庭，代表家庭和睦。吉卦，预示家庭幸福。适合处理家事、团聚、家庭投资。'},
+{name:'火泽睽',emoji:'🔥☱',meaning:'睽卦象征乖离，代表分离和矛盾。需沟通协调，化解分歧。适合谈判、调解、化解矛盾。'},
+{name:'水山蹇',emoji:'💧⛰️',meaning:'蹇卦象征蹇难，代表困难和阻碍。需耐心等待，寻求帮助。不宜冒进，适合求助、等待。'},
+{name:'雷水解',emoji:'⚡💧',meaning:'解卦象征解脱，代表化解和释放。吉卦，预示困难解除。适合解决问题、释放压力、重新开始。'},
+{name:'山泽损',emoji:'⛰️☱',meaning:'损卦象征减损，代表损失和付出。需有舍有得，先损后益。适合投资、付出、积累福报。'},
+{name:'风雷益',emoji:'🌬️⚡',meaning:'益卦象征增益，代表受益和成长。大吉之卦，预示收获丰厚。适合投资、合作、积极进取。'},
+{name:'泽天夬',emoji:'☱☰',meaning:'夬卦象征决断，代表果断和裁决。需果断决策，但不可过于强硬。适合裁决、决断、果断行动。'},
+{name:'天风姤',emoji:'☰🌬️',meaning:'姤卦象征遇合，代表邂逅和机遇。需谨慎选择，防微杜渐。适合社交、把握机会，但要谨慎。'},
+{name:'泽地萃',emoji:'☱☷',meaning:'萃卦象征聚集，代表汇聚和团结。吉卦，预示人气旺盛。适合聚会、合作、团队建设。'},
+{name:'地风升',emoji:'☷🌬️',meaning:'升卦象征上升，代表提升和进步。吉卦，预示稳步上升。适合升职、学习、向上发展。'},
+{name:'泽水困',emoji:'☱💧',meaning:'困卦象征困穷，代表困境和束缚。需坚守信念，等待转机。不宜妄动，适合坚守、等待。'},
+{name:'水风井',emoji:'💧🌬️',meaning:'井卦象征水井，代表滋养和恒久。吉卦，预示源远流长。适合长期规划、持续投入。'},
+{name:'泽火革',emoji:'☱🔥',meaning:'革卦象征变革，代表改革和革新。需顺应天时，果断变革。适合改革、创新、转型。'},
+{name:'火风鼎',emoji:'🔥🌬️',meaning:'鼎卦象征鼎器，代表稳定和革新。吉卦，预示事业稳固。适合创业、建立新秩序。'},
+{name:'震为雷',emoji:'☳',meaning:'震卦象征雷，代表震动和行动。需临危不惧，果断行动。适合应对变化、果断决策。'},
+{name:'艮为山',emoji:'☶',meaning:'艮卦象征山，代表静止和止步。需知止而后定，适可而止。适合休息、反思、停止冒险。'},
+{name:'风山渐',emoji:'🌬️⛰️',meaning:'渐卦象征渐进，代表循序渐进。吉卦，预示稳步发展。适合循序渐进，不可急于求成。'},
+{name:'雷泽归妹',emoji:'⚡☱',meaning:'归妹卦象征嫁娶，代表结合和归宿。需谨慎选择，不可草率。适合婚姻、合作、慎重决策。'},
+{name:'雷火丰',emoji:'⚡🔥',meaning:'丰卦象征丰盛，代表丰收和繁荣。大吉之卦，预示硕果累累。适合收获、庆祝、分享成果。'},
+{name:'火山旅',emoji:'🔥⛰️',meaning:'旅卦象征旅行，代表漂泊和探索。需谨慎行事，保持警觉。适合旅行、探索、外出发展。'},
+{name:'巽为风',emoji:'☴',meaning:'巽卦象征风，代表柔顺和渗透。需以柔克刚，循序渐进。适合沟通、渗透、柔性策略。'},
+{name:'兑为泽',emoji:'☱',meaning:'兑卦象征泽，代表喜悦和和谐。吉卦，预示欢乐祥和。适合庆祝、社交、享受快乐。'},
+{name:'风水涣',emoji:'🌬️💧',meaning:'涣卦象征涣散，代表分散和化解。需凝聚人心，化解危机。适合化解矛盾、凝聚团队。'},
+{name:'水泽节',emoji:'💧☱',meaning:'节卦象征节制，代表节约和适度。需量入为出，适可而止。适合理财、节制、保持平衡。'},
+{name:'风泽中孚',emoji:'🌬️☱',meaning:'中孚卦象征诚信，代表真诚和信任。大吉之卦，预示诚信为本。适合建立信任、真诚合作。'},
+{name:'雷山小过',emoji:'⚡⛰️',meaning:'小过卦象征小过，代表小的过度。需谨慎行事，不可大意。适合小心行事、避免过失。'},
+{name:'水火既济',emoji:'💧🔥',meaning:'既济卦象征完成，代表成功和圆满。吉卦，预示事情已成。适合收尾、总结、享受成果。'},
+{name:'火水未济',emoji:'🔥💧',meaning:'未济卦象征未完成，代表新的开始。需继续努力，不可松懈。适合开始新项目、继续努力。'}
+];
+const COLOR_DIVINE=[
+{name:'红色',color:'#E53935',emoji:'🔴',personality:'你是一个充满激情和活力的人。红色代表热情、勇气和行动力。你天生具有领导气质，喜欢成为焦点，做事果断不拖泥带水。',fortune:'近期你的能量充沛，适合主动出击。事业上有突破的机会，感情方面也会遇到让你心动的人。注意控制脾气，避免因冲动而做出后悔的决定。'},
+{name:'橙色',color:'#FB8C00',emoji:'🟠',personality:'你是一个温暖乐观的人。橙色代表创造力、社交和乐观精神。你善于与人沟通，充满幽默感，总能给身边的人带来欢乐。',fortune:'近期人际关系运势良好，适合拓展社交圈。工作上有合作的机会，团队合作会带来意想不到的成果。保持乐观心态，好运自然会降临。'},
+{name:'黄色',color:'#FDD835',emoji:'🟡',personality:'你是一个聪明理性的人。黄色代表智慧、逻辑和好奇心。你思维敏捷，善于分析问题，对知识有强烈的渴望，是朋友圈中的智囊。',fortune:'近期学习运和考试运极佳，适合充电学习或考取证书。财运方面也有小惊喜，可能会有意外收入。多阅读、多思考，会给你带来新的机遇。'},
+{name:'绿色',color:'#43A047',emoji:'🟢',personality:'你是一个平和善良的人。绿色代表和谐、成长和治愈。你重视平衡，善于倾听，有很强的同理心，是朋友们最信赖的倾诉对象。',fortune:'近期身心状态良好，适合进行户外运动或亲近大自然。健康运势上升，之前的身体不适会有所缓解。感情方面平稳温馨，适合与伴侣共度美好时光。'},
+{name:'蓝色',color:'#1E88E5',emoji:'🔵',personality:'你是一个沉稳可靠的人。蓝色代表信任、责任和深度。你做事认真负责，值得信赖，有很强的使命感。内心世界丰富，喜欢深入思考。',fortune:'近期事业运势稳步上升，你的努力会被上司和同事认可。适合制定长期计划并坚持执行。感情方面需要多表达，让对方感受到你的真心。'},
+{name:'紫色',color:'#8E24AA',emoji:'🟣',personality:'你是一个富有灵性的人。紫色代表直觉、创造力和神秘感。你有独特的审美观和艺术天赋，思维超脱常人，对神秘事物充满好奇。',fortune:'近期灵感迸发，适合从事创意工作或艺术创作。直觉敏锐，可以相信自己的第六感。可能会遇到贵人相助，带来意想不到的机会。'},
+{name:'粉色',color:'#EC407A',emoji:'💖',personality:'你是一个温柔浪漫的人。粉色代表爱、关怀和柔软。你内心细腻，重视情感交流，对爱情充满憧憬，愿意为爱的人付出一切。',fortune:'近期桃花运旺盛，单身者有机会遇到心仪对象，有伴侣者感情升温。适合约会、表白或制造浪漫惊喜。也要注意爱自己，保持内心的独立和自信。'},
+{name:'黑色',color:'#212121',emoji:'⚫',personality:'你是一个深沉内敛的人。黑色代表神秘、力量和控制。你有很强的自我保护意识，不轻易向人敞开心扉，但内心其实非常敏感和丰富。',fortune:'近期适合沉淀反思，整理过去的经验和教训。虽然表面平静，但内在正在积蓄力量。事业上可能会有重要的转折点，做好准备迎接变化。'},
+{name:'白色',color:'#FAFAFA',emoji:'⚪',personality:'你是一个纯洁理想的人。白色代表纯真、完美和新的开始。你追求简单纯粹的生活，有很高的道德标准，内心善良，讨厌虚伪和复杂。',fortune:'近期适合开始新的计划和项目，新的机遇正在向你招手。保持初心，坚持原则，会赢得他人的尊重和信任。健康方面注意保持规律作息。'}
+];
 // ===== UTILS =====
 function $(s){return document.querySelector(s)}
 function $$(s){return document.querySelectorAll(s)}
@@ -679,6 +949,9 @@ function openSub(name,data){
     if(name==='dream')renderDream();
     if(name==='settings')renderSettings();
     if(name==='bt-detail')renderBtDetail(data);
+    if(name==='fortune-stick')renderFortuneStick();
+    if(name==='life-number')renderLifeNumber();
+    if(name==='crystal')renderCrystal();
     sub.classList.add('active');
   }
 }
@@ -742,7 +1015,10 @@ function initDivineTools(){
     {icon:'🌟',name:'每日运势',desc:'查看今日运势',action:"openSub('fortune')"},
     {icon:'📅',name:'生辰八字',desc:'解析命理格局',action:"openSub('bazi')"},
     {icon:'🩸',name:'血型分析',desc:'探索血型密码',action:"openSub('blood')"},
-    {icon:'✍️',name:'姓名测试',desc:'测算名字吉凶',action:"openSub('name')"}
+    {icon:'✍️',name:'姓名测试',desc:'测算名字吉凶',action:"openSub('name')"},
+    {icon:'🎲',name:'占星骰子',desc:'行星星座宫位解读',action:"openSub('astro-dice')"},
+    {icon:'🪙',name:'易经硬币',desc:'六爻卦象占卜',action:"openSub('coin')"},
+    {icon:'🎨',name:'颜色占卜',desc:'色彩性格与运势',action:"openSub('color')"}
   ];
   tools.forEach(t=>{
     g.innerHTML+=`<div class="tool-item ripple" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
@@ -755,7 +1031,10 @@ function initUtilTools(){
     {icon:'📱',name:'手机吉凶',desc:'测试号码运势',action:"openSub('phone')"},
     {icon:'💭',name:'周公解梦',desc:'解析梦境含义',action:"openSub('dream')"},
     {icon:'💕',name:'星座配对',desc:'缘分指数测试',action:"openSub('pair')"},
-    {icon:'🃏',name:'塔罗占卜',desc:'命运之牌指引',action:"openSub('tarot')"}
+    {icon:'🃏',name:'塔罗占卜',desc:'命运之牌指引',action:"openSub('tarot')"},
+    {icon:'🎲',name:'占星骰子',desc:'行星星座宫位解读',action:"openSub('astro-dice')"},
+    {icon:'🪙',name:'易经硬币',desc:'六爻卦象占卜',action:"openSub('coin')"},
+    {icon:'🎨',name:'颜色占卜',desc:'色彩性格与运势',action:"openSub('color')"}
   ];
   tools.forEach(t=>{
     g.innerHTML+=`<div class="tool-item ripple" onclick="${t.action}"><span class="ti-icon">${t.icon}</span><div><div class="ti-name">${t.name}</div><div class="ti-desc">${t.desc}</div></div></div>`;
@@ -1739,6 +2018,134 @@ function showToastFav(msg,icon){
   document.body.appendChild(t);
   setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(-10px)';setTimeout(()=>t.remove(),300)},1500);
 }
+// ===== FORTUNE STICK =====
+function renderFortuneStick(){
+  $('#sub-fortune-stick').innerHTML=`
+    <div class="sub-header"><button class="back-btn" onclick="closeSub('fortune-stick')">←</button><div class="title">每日一签</div></div>
+    <div class="stick-container">
+      <div class="stick-tube" id="stickTube"><div class="stick-emoji">🎋</div></div>
+      <p style="font-size:14px;color:var(--text2);margin-bottom:20px">心诚则灵，默念所求，点击摇签</p>
+      <button class="stick-btn" id="shakeBtn" onclick="shakeStick()">🎋 摇签</button>
+      <div id="stickResult" style="display:none;margin-top:20px"></div>
+    </div>`;
+}
+function shakeStick(){
+  const tube=$('#stickTube');
+  const btn=$('#shakeBtn');
+  const result=$('#stickResult');
+  if(tube.classList.contains('shake'))return;
+  tube.classList.add('shake');
+  btn.disabled=true;
+  btn.textContent='摇签中...';
+  result.style.display='none';
+  setTimeout(()=>{
+    tube.classList.remove('shake');
+    btn.disabled=false;
+    btn.textContent='🎋 再摇一签';
+    const stick=pick(FORTUNE_STICKS);
+    const levelClass=stick.level;
+    const levelText={great:'大吉',good:'吉',mid:'平',bad:'凶'}[stick.level];
+    result.innerHTML=`
+      <div class="stick-result">
+        <div class="stick-num">第${stick.num}签</div>
+        <div class="stick-level ${levelClass}">${stick.title} · ${levelText}</div>
+        <div class="stick-text">${stick.text}</div>
+        <div class="stick-meaning">
+          <h4>📖 签文解读</h4>
+          <p>${stick.meaning}</p>
+        </div>
+        <div class="stick-meaning">
+          <h4>💡 运势建议</h4>
+          <p>${stick.advice}</p>
+        </div>
+      </div>`;
+    result.style.display='block';
+    createConfetti(window.innerWidth/2,window.innerHeight/3);
+  },900);
+}
+// ===== LIFE NUMBER =====
+function renderLifeNumber(){
+  $('#sub-life-number').innerHTML=`
+    <div class="sub-header"><button class="back-btn" onclick="closeSub('life-number')">←</button><div class="title">生命灵数</div></div>
+    <div class="ln-input-wrap">
+      <p style="font-size:14px;color:var(--text2);margin-bottom:12px">输入出生日期，探索你的生命密码</p>
+      <input type="date" id="lnDate" style="max-width:280px">
+    </div>
+    <button class="pair-btn" onclick="calcLifeNumber()">🔢 计算灵数</button>
+    <div id="lnResult"></div>`;
+}
+function calcLifeNumber(){
+  const dateStr=$('#lnDate').value;
+  if(!dateStr){showToast('请选择出生日期');return}
+  const parts=dateStr.split('-');
+  const year=parseInt(parts[0]),month=parseInt(parts[1]),day=parseInt(parts[2]);
+  function reduce(n){
+    while(n>9){let s=0;while(n>0){s+=n%10;n=Math.floor(n/10)}n=s}
+    return n||9;
+  }
+  const lifeNum=reduce(year+month+day);
+  const ln=LIFE_NUMBERS.find(x=>x.num===lifeNum);
+  if(!ln)return;
+  $('#lnResult').innerHTML=`
+    <div class="ln-result">
+      <div class="ln-num">${ln.num}</div>
+      <div class="ln-title">${ln.title}</div>
+      <div class="ln-subtitle">${ln.desc}</div>
+      <div class="ln-section">
+        <h4>🎭 性格特质</h4>
+        <p>${ln.trait}</p>
+      </div>
+      <div class="ln-section">
+        <h4>📚 人生课题</h4>
+        <p>${ln.lesson}</p>
+      </div>
+      <div class="ln-section">
+        <h4>💼 适合职业</h4>
+        <p>${ln.career}</p>
+      </div>
+      <div class="ln-section">
+        <h4>🔮 深度解析</h4>
+        <p>${ln.detail}</p>
+      </div>
+    </div>`;
+  createConfetti(window.innerWidth/2,window.innerHeight/3);
+}
+// ===== CRYSTAL =====
+function renderCrystal(){
+  let gridHtml='';
+  CRYSTALS.forEach((c,i)=>{
+    gridHtml+=`<div class="crystal-card" onclick="selectCrystal(${i})" id="cr-${i}"><div class="cr-emoji">${c.emoji}</div><div class="cr-name">${c.name}</div><div class="cr-desc">${c.energy}</div></div>`;
+  });
+  $('#sub-crystal').innerHTML=`
+    <div class="sub-header"><button class="back-btn" onclick="closeSub('crystal')">←</button><div class="title">水晶占卜</div></div>
+    <div style="padding:16px;text-align:center">
+      <p style="font-size:14px;color:var(--text2);margin-bottom:8px">闭上眼睛，深呼吸，凭直觉选择一颗水晶</p>
+      <p style="font-size:12px;color:var(--text3)">它会告诉你此刻需要的能量指引</p>
+    </div>
+    <div class="crystal-grid">${gridHtml}</div>
+    <div id="crystalResult" style="display:none"></div>`;
+}
+function selectCrystal(idx){
+  $$('.crystal-card').forEach(c=>c.classList.remove('selected'));
+  $(`#cr-${idx}`).classList.add('selected');
+  const c=CRYSTALS[idx];
+  $('#crystalResult').innerHTML=`
+    <div class="crystal-result">
+      <div class="cr-big">${c.emoji}</div>
+      <div class="cr-title">${c.name}</div>
+      <div class="cr-sub">${c.energy}</div>
+      <div class="crystal-section">
+        <h4>🔮 水晶讯息</h4>
+        <p>${c.desc}</p>
+      </div>
+      <div class="crystal-section">
+        <h4>💎 疗愈建议</h4>
+        <p>${c.healing}</p>
+      </div>
+    </div>`;
+  $('#crystalResult').style.display='block';
+  createConfetti(window.innerWidth/2,window.innerHeight/3);
+}
 function renderFavorites(){
   const favs=getFavorites();
   const container=$('#sub-favorites');
@@ -1789,6 +2196,146 @@ function toggleFavDetail(id,name,emoji){
     btn.classList.toggle('active',result);
     btn.textContent=result?'❤️':'🤍';
   }
+}
+function renderAstroDice(){
+  const container=$('#sub-astro-dice');
+  container.innerHTML=`<div class="sub-header"><button class="back-btn" onclick="closeSub('astro-dice')">←</button><div class="title">占星骰子</div></div>
+  <div class="astro-dice-area">
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px">三个骰子分别代表：行星 · 星座 · 宫位</div>
+    <div class="astro-dice-wrap" id="astroDiceWrap">
+      <div class="astro-die" id="diePlanet"><div class="ad-icon">☀️</div><div class="ad-label">行星</div><div class="ad-val" id="valPlanet">?</div></div>
+      <div class="astro-die" id="dieSign"><div class="ad-icon">♈</div><div class="ad-label">星座</div><div class="ad-val" id="valSign">?</div></div>
+      <div class="astro-die" id="dieHouse"><div class="ad-icon">👤</div><div class="ad-label">宫位</div><div class="ad-val" id="valHouse">?</div></div>
+    </div>
+    <button class="astro-dice-btn" id="astroDiceBtn" onclick="rollAstroDice()">🎲 投掷骰子</button>
+    <div id="astroDiceResult"></div>
+  </div>`;
+}
+function rollAstroDice(){
+  const btn=$('#astroDiceBtn');
+  if(btn.disabled)return;
+  btn.disabled=true;
+  btn.textContent='投掷中...';
+  const diePlanet=$('#diePlanet');
+  const dieSign=$('#dieSign');
+  const dieHouse=$('#dieHouse');
+  diePlanet.classList.add('spinning');
+  setTimeout(()=>dieSign.classList.add('spinning'),200);
+  setTimeout(()=>dieHouse.classList.add('spinning'),400);
+  setTimeout(()=>{
+    const planet=pick(ASTRO_PLANETS);
+    const sign=pick(ASTRO_SIGNS);
+    const house=pick(ASTRO_HOUSES);
+    diePlanet.classList.remove('spinning');
+    dieSign.classList.remove('spinning');
+    dieHouse.classList.remove('spinning');
+    $('#valPlanet').textContent=planet.name;
+    diePlanet.querySelector('.ad-icon').textContent=planet.emoji;
+    $('#valSign').textContent=sign.name;
+    dieSign.querySelector('.ad-icon').textContent=sign.emoji;
+    $('#valHouse').textContent=house.name;
+    dieHouse.querySelector('.ad-icon').textContent=house.emoji;
+    const resultHtml=`<div class="astro-dice-result">
+      <h4>✨ 占星解读</h4>
+      <p><strong>${planet.emoji} ${planet.name} · ${sign.emoji} ${sign.name} · ${house.emoji} ${house.name}</strong></p>
+      <p style="margin-top:10px"><strong>行星含义：</strong>${planet.meaning}</p>
+      <p style="margin-top:8px"><strong>星座特质：</strong>${sign.meaning}</p>
+      <p style="margin-top:8px"><strong>宫位领域：</strong>${house.meaning}</p>
+      <p style="margin-top:8px"><strong>综合指引：</strong>${planet.name}落入${sign.name}的${house.name}，暗示你当前的能量集中在${house.name.replace(/第.宫/,'')}领域。${sign.name}的特质会让你以${sign.meaning.substring(0,20)}的方式去表达${planet.name}的能量。建议关注${house.meaning.substring(0,15)}，可能会有重要的启示。</p>
+    </div>`;
+    $('#astroDiceResult').innerHTML=resultHtml;
+    btn.disabled=false;
+    btn.textContent='🎲 再投一次';
+  },2000);
+}
+function renderCoin(){
+  const container=$('#sub-coin');
+  container.innerHTML=`<div class="sub-header"><button class="back-btn" onclick="closeSub('coin')">←</button><div class="title">易经硬币</div></div>
+  <div class="coin-area">
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px">投掷三枚硬币，生成六爻卦象</div>
+    <div class="coin-wrap" id="coinWrap">
+      <div class="coin-item" id="coin1"><div class="coin-face coin-front"></div></div>
+      <div class="coin-item" id="coin2"><div class="coin-face coin-front"></div></div>
+      <div class="coin-item" id="coin3"><div class="coin-face coin-front"></div></div>
+    </div>
+    <button class="coin-btn" id="coinBtn" onclick="tossCoins()">🪙 投掷硬币</button>
+    <div id="coinYaoWrap" class="coin-yao-wrap" style="display:none"></div>
+    <div id="coinResult"></div>
+  </div>`;
+  window.coinTossCount=0;
+  window.coinYaoList=[];
+}
+function tossCoins(){
+  const btn=$('#coinBtn');
+  if(btn.disabled)return;
+  if(window.coinTossCount>=6){window.coinTossCount=0;window.coinYaoList=[];$('#coinYaoWrap').innerHTML='';$('#coinResult').innerHTML='';}
+  btn.disabled=true;
+  btn.textContent='投掷中...';
+  const c1=$('#coin1');const c2=$('#coin2');const c3=$('#coin3');
+  c1.classList.add('flipping');
+  setTimeout(()=>c2.classList.add('flipping'),150);
+  setTimeout(()=>c3.classList.add('flipping'),300);
+  setTimeout(()=>{
+    const r1=Math.random()>0.5?1:0;
+    const r2=Math.random()>0.5?1:0;
+    const r3=Math.random()>0.5?1:0;
+    const sum=r1+r2+r3;
+    const isYang=sum>=2;
+    c1.classList.remove('flipping');
+    c2.classList.remove('flipping');
+    c3.classList.remove('flipping');
+    c1.querySelector('.coin-face').className='coin-face '+(r1?'coin-front':'coin-back');
+    c2.querySelector('.coin-face').className='coin-face '+(r2?'coin-front':'coin-back');
+    c3.querySelector('.coin-face').className='coin-face '+(r3?'coin-front':'coin-back');
+    window.coinTossCount++;
+    window.coinYaoList.unshift(isYang?'yang':'yin');
+    const yw=$('#coinYaoWrap');
+    yw.style.display='flex';
+    let yaoHtml='';
+    window.coinYaoList.forEach((y,i)=>{
+      yaoHtml+=`<div class="coin-yao ${y}" style="opacity:${1-i*0.15}"></div>`;
+    });
+    yw.innerHTML=yaoHtml;
+    if(window.coinTossCount>=6){
+      const guaIndex=rand(0,I_CHING.length-1);
+      const gua=I_CHING[guaIndex];
+      $('#coinResult').innerHTML=`<div class="coin-result">
+        <h4>📜 卦象解读 · ${gua.name} ${gua.emoji}</h4>
+        <p>${gua.meaning}</p>
+        <p style="margin-top:10px;font-size:12px;color:var(--text3)">六爻已生成，以上卦象根据易经六十四卦随机抽取，仅供参考。</p>
+      </div>`;
+      btn.textContent='🪙 重新起卦';
+      btn.disabled=false;
+    }else{
+      btn.textContent=`🪙 第 ${window.coinTossCount+1} 次投掷`;
+      btn.disabled=false;
+    }
+  },1200);
+}
+function renderColor(){
+  const container=$('#sub-color');
+  let cardsHtml='';
+  COLOR_DIVINE.forEach((c,i)=>{
+    cardsHtml+=`<div class="color-card" style="background:${c.color}" onclick="selectColor(${i})" id="colorCard${i}"><div class="cc-name">${c.emoji} ${c.name}</div></div>`;
+  });
+  container.innerHTML=`<div class="sub-header"><button class="back-btn" onclick="closeSub('color')">←</button><div class="title">颜色占卜</div></div>
+  <div class="color-area">
+    <div style="font-size:14px;color:var(--text3);margin-bottom:16px;text-align:center">选择一个你最有感觉的颜色</div>
+    <div class="color-grid">${cardsHtml}</div>
+    <div id="colorResult"></div>
+  </div>`;
+}
+function selectColor(idx){
+  COLOR_DIVINE.forEach((_,i)=>{
+    const card=$('#colorCard'+i);
+    if(card)card.classList.toggle('selected',i===idx);
+  });
+  const c=COLOR_DIVINE[idx];
+  $('#colorResult').innerHTML=`<div class="color-result" style="border-left:4px solid ${c.color}">
+    <h4>${c.emoji} ${c.name} · 性格分析</h4>
+    <p><strong>性格特质：</strong>${c.personality}</p>
+    <p style="margin-top:10px"><strong>运势建议：</strong>${c.fortune}</p>
+  </div>`;
 }
 function renderBaguaCard(zodiacId){
   const bgName=ZODIAC_BAGUA[zodiacId];
