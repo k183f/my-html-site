@@ -705,6 +705,7 @@ function updateFortune(){
   const f=getDailyFortune(z.id);
   const c=ELEMENT_COLORS[z.element]||'#7C83FD';
   const directions=['东','南','西','北','东南','东北','西南','西北'];
+  const tipText=f.overall>=70?'今天是充满机遇的一天，保持积极心态，好运自然来！':f.overall>=50?'今天适合稳扎稳打，做好手头的事情，不要急于求成。':'今天需要多加注意，保持冷静和耐心，困难终将过去。';
   let html=`
     <div class="fortune-card" style="background:linear-gradient(135deg,${c}88,#302B63)">
       <div style="font-size:36px;margin-bottom:8px">${z.emoji}</div>
@@ -736,7 +737,7 @@ function updateFortune(){
         <div class="lucky-item"><div class="li-icon">💎</div><div class="li-label">幸运物</div><div class="li-val">${z.luckyItem}</div></div>
       </div>
     </div>
-    <div class="tip-box" style="margin:16px">💡 今日小贴士：${f.overall>=70?'今天是充满机遇的一天，保持积极心态，好运自然来！':f.overall>=50?'今天适合稳扎稳打，做好手头的事情，不要急于求成。':'今天需要多加注意，保持冷静和耐心，困难终将过去。'}</div>`;
+    <div class="tip-box" style="margin:16px">💡 今日小贴士：${tipText}</div>`;
   $('#fortuneContent').innerHTML=html;
 }
 // ===== BAZI =====
@@ -805,13 +806,25 @@ function calcBazi(){
   });
   const missingWX=WU_XING.filter(w=>wxCount[w]===0);
   const strongWX=WU_XING.filter(w=>wxCount[w]>=2);
+  const strongText=strongWX.length>0?strongWX.join('、')+'气旺，':'';
+  const missingText=missingWX.length>0?'缺'+missingWX.join('、')+'，但不妨碍整体格局。':'';
+  const missingText2=missingWX.length>0?'五行缺'+missingWX.join('、')+'，可通过后天补救。':'';
+  const missingText3=missingWX.length>0?'五行缺'+missingWX.join('、')+'，':'';
+  const strongText2=strongWX.length>0?strongWX.join('、')+'较为旺盛，':'';
   const readings={
-    high:`${name}，您的八字格局非常好！日主${dayMaster}${dayMasterWX}得令得地，五行流通有情。${strongWX.length>0?strongWX.join('、')+'气旺，'}${missingWX.length>0?'缺'+missingWX.join('、')+'，但不妨碍整体格局。':''}一生运势较为顺遂，事业有成，财运亨通。建议多行善积德，保持谦虚之心。`,
-    mid:`${name}，您的八字格局中等偏上。日主${dayMaster}${dayMasterWX}，${strongWX.length>0?strongWX.join('、')+'较为旺盛，':''}${missingWX.length>0?'五行缺'+missingWX.join('、')+'，可通过后天补救。':''}人生中会有起伏，但总体运势平稳。建议注重自我提升，把握机遇。`,
-    low:`${name}，您的八字格局需要后天努力来弥补。日主${dayMaster}${dayMasterWX}偏弱，${missingWX.length>0?'五行缺'+missingWX.join('、')+'，':''}需要通过方位、颜色、职业等来调和五行。保持积极心态，勤勉努力，也能创造美好人生。`
+    high:`${name}，您的八字格局非常好！日主${dayMaster}${dayMasterWX}得令得地，五行流通有情。${strongText}${missingText}一生运势较为顺遂，事业有成，财运亨通。建议多行善积德，保持谦虚之心。`,
+    mid:`${name}，您的八字格局中等偏上。日主${dayMaster}${dayMasterWX}，${strongText2}${missingText2}人生中会有起伏，但总体运势平稳。建议注重自我提升，把握机遇。`,
+    low:`${name}，您的八字格局需要后天努力来弥补。日主${dayMaster}${dayMasterWX}偏弱，${missingText3}需要通过方位、颜色、职业等来调和五行。保持积极心态，勤勉努力，也能创造美好人生。`
   };
   const reading=score>=80?readings.high:score>=60?readings.mid:readings.low;
   $('#baziResult').style.display='block';
+  const liuNianText=score>=70?'较为相合，整体运势不错。':score>=50?'有冲有合，需注意把握机遇。':'有一定冲克，需谨慎行事。';
+  const liuNianAdv=score>=70?'积极进取，把握好运。':'稳扎稳打，以静制动。';
+  const dayMasterDesc=dayMasterWX==='木'?'如树木般坚韧向上，有生长的力量。':dayMasterWX==='火'?'如火焰般热情明亮，有照亮他人的特质。':dayMasterWX==='土'?'如大地般厚重包容，有承载万物的胸怀。':dayMasterWX==='金'?'如金属般坚毅果断，有锻造自我的决心。':'如流水般灵活智慧，有润泽万物的温柔。';
+  const missingWXHtml=missingWX.length>0?'<p style="font-size:13px;color:var(--accent);margin-top:8px">五行缺：'+missingWX.join('、')+'</p>':'';
+  const strongWXHtml=strongWX.length>0?'<p style="font-size:13px;color:var(--primary);margin-top:4px">五行旺：'+strongWX.join('、')+'</p>':'';
+  const genderText=gender==='male'?'乾造':'坤造';
+  const animalTraits=['机灵聪慧','勤劳踏实','威武勇敢','温文尔雅','气宇轩昂','智慧深沉','热情奔放','温和善良','聪明灵活','勤勉守信','忠诚正直','憨厚可爱'];
   $('#baziResult').innerHTML=`
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">📜 四柱八字</h3>
@@ -825,16 +838,16 @@ function calcBazi(){
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">🔮 五行分析</h3>
       <div class="wx-bar-wrap">${wxBarHtml}</div>
-      ${missingWX.length>0?`<p style="font-size:13px;color:var(--accent);margin-top:8px">五行缺：${missingWX.join('、')}</p>`:''}
-      ${strongWX.length>0?`<p style="font-size:13px;color:var(--primary);margin-top:4px">五行旺：${strongWX.join('、')}</p>`:''}
+      ${missingWXHtml}
+      ${strongWXHtml}
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">🐾 生肖信息</h3>
-      <p style="font-size:14px;color:var(--text2)">属${animal}，${gender==='male'?'乾造':'坤造'}。${animal}年出生之人，性格${['机灵聪慧','勤劳踏实','威武勇敢','温文尔雅','气宇轩昂','智慧深沉','热情奔放','温和善良','聪明灵活','勤勉守信','忠诚正直','憨厚可爱'][yearZhi]}。`</p>
+      <p style="font-size:14px;color:var(--text2)">属${animal}，${genderText}。${animal}年出生之人，性格${animalTraits[yearZhi]}。</p>
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">☀️ 日主分析</h3>
-      <p style="font-size:14px;color:var(--text2)">日主为${dayMaster}（${dayMasterWX}），代表您自身的本质属性。${dayMasterWX==='木'?'如树木般坚韧向上，有生长的力量。':dayMasterWX==='火'?'如火焰般热情明亮，有照亮他人的特质。':dayMasterWX==='土'?'如大地般厚重包容，有承载万物的胸怀。':dayMasterWX==='金'?'如金属般坚毅果断，有锻造自我的决心。':'如流水般灵活智慧，有润泽万物的温柔。'}</p>
+      <p style="font-size:14px;color:var(--text2)">日主为${dayMaster}（${dayMasterWX}），代表您自身的本质属性。${dayMasterDesc}</p>
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">📈 大运排列</h3>
@@ -842,13 +855,14 @@ function calcBazi(){
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">🔄 流年分析</h3>
-      <p style="font-size:14px;color:var(--text2)">${new Date().getFullYear()}年为${HEAVENLY_STEMS[(new Date().getFullYear()-4)%10]}${EARTHLY_BRANCHES[(new Date().getFullYear()-4)%12]}年，流年与您的八字${score>=70?'较为相合，整体运势不错。':score>=50?'有冲有合，需注意把握机遇。':'有一定冲克，需谨慎行事。'}建议${score>=70?'积极进取，把握好运。':'稳扎稳打，以静制动。'}</p>
+      <p style="font-size:14px;color:var(--text2)">${new Date().getFullYear()}年为${HEAVENLY_STEMS[(new Date().getFullYear()-4)%10]}${EARTHLY_BRANCHES[(new Date().getFullYear()-4)%12]}年，流年与您的八字${liuNianText}建议${liuNianAdv}</p>
     </div>
     <div class="score-display"><div class="score-big">${score}</div><div class="score-label">命格评分</div></div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">📝 命格总评</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text2)">${reading}</p>
-    </div>`;
+    </div>
+  `;
   showToast('八字测算完成！');
 }
 // ===== TAROT =====
@@ -890,10 +904,14 @@ function doTarotReading(){
     cardsHtml+=`<div class="tarot-card-display" style="animation-delay:${i*0.2}s"><div class="tc-emoji">${card.emoji}</div><div class="tc-name">${card.name}</div><div class="tc-pos">${posNames[i]||''} · ${card.reversed?'逆位':'正位'}</div><div class="tc-meaning">${card.reversed?card.reversed:card.upright}</div></div>`;
   });
   const overallMeanings=cards.map(c=>c.reversed?c.reversed:c.upright).join('；');
+  const lastCardText=cards[cards.length-1].reversed?'最后一张牌的逆位暗示结果可能需要更多时间来显现。':'最后一张牌的正位带来了令人鼓舞的信号。';
+  const card1Text=cards.length>1?(cards[1].reversed?cards[1].name+'逆位提醒你注意潜在的障碍。':cards[1].name+'正位预示着事情会朝着有利的方向发展。'):'';
+  const card0Text=cards[0].reversed?cards[0].name+'逆位暗示你需要面对一些内在的挑战。':cards[0].name+'正位为你带来了积极的能量和指引。';
+  const questionPrefix=question?'关于"'+question+'"：':'';
   const interpretations=[
-    `综合来看，${question?'关于"'+question+'"：':''}这组牌阵显示你正处于一个转变的关键时期。${cards[0].reversed?cards[0].name+'逆位暗示你需要面对一些内在的挑战。':cards[0].name+'正位为你带来了积极的能量和指引。'}建议保持开放的心态，相信自己的直觉，勇敢地面对未来的每一个选择。`,
-    `从牌面来看，${question?'关于"'+question+'"：':''}当前的局势蕴含着丰富的可能性。${cards.length>1?cards[1].reversed?cards[1].name+'逆位提醒你注意潜在的障碍。':cards[1].name+'正位预示着事情会朝着有利的方向发展。':''}整体而言，这是一个需要耐心和智慧的时刻，相信一切都会朝着最好的方向发展。`,
-    `这组牌阵传递出深刻的信息。${question?'关于"'+question+'"：':''}${cards[cards.length-1].reversed?'最后一张牌的逆位暗示结果可能需要更多时间来显现。':'最后一张牌的正位带来了令人鼓舞的信号。'}建议你保持内心的平静，用智慧和勇气去迎接即将到来的变化。`
+    `综合来看，${questionPrefix}这组牌阵显示你正处于一个转变的关键时期。${card0Text}建议保持开放的心态，相信自己的直觉，勇敢地面对未来的每一个选择。`,
+    `从牌面来看，${questionPrefix}当前的局势蕴含着丰富的可能性。${card1Text}整体而言，这是一个需要耐心和智慧的时刻，相信一切都会朝着最好的方向发展。`,
+    `这组牌阵传递出深刻的信息。${questionPrefix}${lastCardText}建议你保持内心的平静，用智慧和勇气去迎接即将到来的变化。`
   ];
   const interp=pick(interpretations);
   $('#tarotResult').style.display='block';
@@ -973,6 +991,7 @@ function calcName(){
   nameWX.forEach(w=>wxCount[w]++);
   // Yin Yang
   const yinYang=strokes.map(s=>s%2===0?'阴':'阳');
+  const yinYangText=yinCount===yangCount?'阴阳平衡，非常理想。':yinCount>yangCount?'偏阴，建议多增加阳刚之气。':'偏阳，建议多培养柔和之气。';
   const yinCount=yinYang.filter(y=>y==='阴').length;
   const yangCount=yinYang.length-yinCount;
   // Score
@@ -1004,7 +1023,7 @@ function calcName(){
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">☯️ 阴阳分析</h3>
-      <p style="font-size:14px;color:var(--text2)">阴${yinCount}阳${yangCount}，${yinCount===yangCount?'阴阳平衡，非常理想。':yinCount>yangCount?'偏阴，建议多增加阳刚之气。':'偏阳，建议多培养柔和之气。'}</p>
+      <p style="font-size:14px;color:var(--text2)">阴${yinCount}阳${yangCount}，${yinYangText}</p>
     </div>
     <div class="card">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">📖 详细解读</h3>
